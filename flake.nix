@@ -41,6 +41,7 @@
   };
   outputs = { self, nixpkgs, neovim, rnix-lsp, ... }@inputs:
   let
+    system = "x86_64-linux";
     plugins = [
       "goyo"
       "everforest"
@@ -70,6 +71,14 @@
       "dkasak-gruvbox"
       "nvim-which-key"
     ];
+
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {allowUnfree = true;};
+      overlays = [
+        inputs.neovim-overlay.overlay
+      ];
+    };
 
     externalBitsOverlay = top: last: {
       rnix-lsp = rnix-lsp.defaultPackage.${top.system};
@@ -102,37 +111,42 @@
         config = {
           vim.viAlias = true;
           vim.vimAlias = true;
+
           vim.theme.everforest.enable = true;
           vim.theme.everforest.underline = true;
           vim.theme.goyo.enable = true;
           vim.theme.limelight.enable = true;
           vim.theme.lightline.enable = true;
+
           vim.latex.enable = true;
           vim.latex.compiler.method = "latexmk";
           vim.latex.viewer.enable = true;
           vim.latex.viewer.method = "zathura";
           vim.latex.viewer.options = "'-reuse-instance -forward-search @tex @line @pdf'";
+
           vim.lsp.enable = true;
           vim.lsp.bash = true;
           vim.lsp.nix = true;
           vim.lsp.vimscript = true;
           vim.lsp.tex = true;
           vim.lsp.lightbulb = true;
+
           vim.filetree.nvimTreeLua.enable = true;
         };
       };
 
-  in {
+    neovimBuilder = lib.neovimBuilder;
+  in rec {
 
-    apps.default = lib.withDefaultSystems (sys: {
+    apps.default = lib.withDefaultSystems (system: {
       type = "app";
-      program = "${self.defaultPackage."${sys}"}/bin/nvim";
+      program = "${self.defaultPackage."${system}"}/bin/nvim";
     });
 
-    defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimKento);
+    defaultPackage = lib.withDefaultSystems (system: self.packages."${system}".neovimKento);
 
-    packages = lib.withDefaultSystems (sys: {
-      neovimKento = mkNeoVimPkg allPkgs."${sys}";
+    packages = lib.withDefaultSystems (system: {
+      neovimKento = mkNeoVimPkg allPkgs."${system}";
     });
   };
 }
