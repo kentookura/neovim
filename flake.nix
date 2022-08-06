@@ -1,5 +1,5 @@
 {
-  description = "Wil Taylor's NeoVim config";
+  description = "Kento's Neovim config";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -129,10 +129,10 @@
       program = "${self.defaultPackage."${sys}"}/bin/nvim";
     });
 
-    defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimWT);
+    defaultPackage = lib.withDefaultSystems (sys: self.packages."${sys}".neovimKento);
 
     packages = lib.withDefaultSystems (sys: {
-      neovimWT = mkNeoVimPkg allPkgs."${sys}";
+      neovimKento = mkNeoVimPkg allPkgs."${sys}";
     });
   };
 }
