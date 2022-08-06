@@ -16,7 +16,11 @@
     limelight = { url = "github:junegunn/limelight.vim"; flake = false; };
     yuck-vim = { url = "github:elkowar/yuck.vim"; flake = false; };
     ultisnips = { url = "github:SirVer/ultisnips"; flake = false; };
+    coq-nvim = { url = "github:ms-jpq/coq_nvim"; flake = false; };
+    coq-artifacts = { url = "github:ms-jpq/coq.artifacts"; flake = false; };
     nvim-tree-lua = { url = "github:kyazdani42/nvim-tree.lua"; flake = false; };
+    nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter"; flake = false;};
+    nvim-treesitter-context = { url = "github:romgrk/nvim-treesitter-context"; flake = false;};
     vim-nix = { url = "github:LnL7/vim-nix"; flake = false; };
     vimtex = { url = "github:lervag/vimtex"; flake = false; };
     neomake = { url = "github:neomake/neomake"; flake = false; };
@@ -25,6 +29,7 @@
     nvim-dap-virtual-text = { url = "github:theHamsta/nvim-dap-virtual-text"; flake = false; };
     neoformat = { url = "github:sbdchd/neoformat"; flake = false; };
     nvim-lightbulb = { url = "github:kosayoda/nvim-lightbulb"; flake = false; };
+    fixcursorhold = { url = "github:antoinemadec/FixCursorHold.nvim"; flake = false; };
     lightline-vim = { url = "github:itchyny/lightline.vim"; flake = false; };
     vim-pandoc = { url = "github:vim-pandoc/vim-pandoc"; flake = false; };
     vim-pandoc-syntax = { url = "github:vim-pandoc/vim-pandoc-syntax"; flake = false; };
@@ -43,7 +48,12 @@
       "ultisnips"
       "limelight"
       "nvim-tree-lua"
+      "nvim-treesitter"
+      "nvim-treesitter-context"
       "nvim-lightbulb"
+      "fixcursorhold"
+      "coq-nvim"
+      "coq-artifacts"
       "nvim-lspconfig"
       "completion-nvim"
       "vim-nix"

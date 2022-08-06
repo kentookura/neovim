@@ -53,6 +53,7 @@ in {
       "vimtex_view_automatic" = mkVimBool cfg.viewer.enable;
       "vimtex_view_forward_search_on_start" = mkVimBool cfg.viewer.searchOnStart;
       "vimtex_view_zathura_options" = mkIfNotNone cfg.viewer.options;
+      "vimtex_syntax_enabled" = 1;
     };
     vim.configRC = ''
       "vimtex_view_zathura_options = '-d result/'
@@ -71,25 +72,7 @@ in {
         \  ],
         \ }
         
-        
-        "let g:vimtex_quickfix_method = 'pulp'
-        "let g:vimtex_quickfix_mode = 0 " don't open window automatically
-        
-        let g:vimtex_syntax_enabled = 1
-        let g:vimtex_syntax_conceal = {
-        \ 'accents': 1,
-        \ 'cites': 1,
-        \ 'fancy': 1,
-        \ 'greek': 1,
-        \ 'math_bounds': 1,
-        \ 'math_delimiters': 1,
-        \ 'math_fracs': 1,
-        \ 'math_super_sub': 1,
-        \ 'math_symbols': 1,
-        \ 'sections': 0,
-        \ 'styles': 1,
-        \}
-      
+
       augroup vimtex_event_1
         au!
         au User VimtexEventQuit VimtexClean
@@ -123,4 +106,3 @@ in {
     '';
   };
 }
-
