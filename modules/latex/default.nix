@@ -49,14 +49,14 @@ in {
     ];
     vim.globals = {
       "vimtex_compiler_method" = mkIfNotNone cfg.compiler.method;
-      "vimtex_view_method" = mkIfNotNone cfg.viewer.method;
-      "vimtex_view_automatic" = mkVimBool cfg.viewer.enable;
-      "vimtex_view_forward_search_on_start" = mkVimBool cfg.viewer.searchOnStart;
-      "vimtex_view_zathura_options" = mkIfNotNone cfg.viewer.options;
+      "vimtex_view_enabled" = 1;
+      "vimtex_view_method" = "zathura";
+      #"vimtex_view_automatic" = 1;
+      #"vimtex_view_forward_search_on_start" = 1;
+      #"vimtex_view_zathura_options" = "-d out -reuse-instance -forward-search @tex @line @pdf";
       "vimtex_syntax_enabled" = 1;
     };
     vim.configRC = ''
-      "vimtex_view_zathura_options = '-d result/'
       "---------------------------------latex-----------------------------------
       let g:vimtex_compiler_latexmk = {
         \ 'build_dir': 'out',
@@ -71,7 +71,6 @@ in {
         \   '-usepretex',
         \  ],
         \ }
-        
 
       augroup vimtex_event_1
         au!

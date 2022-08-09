@@ -31,14 +31,21 @@ in {
       nvim-lspconfig 
       (if cfg.coq then coq-nvim else null)
       (if cfg.coq then coq-artifacts else null)
-#      vim-nix
-#      vimtex
+      (if cfg.nix then vim-nix else null)
 #      (if cfg.nix then vim-nix else null)
 #      nvim-treesitter
 #      nvim-treesitter-context
     ];
 
     vim.configRC = ''
+      let g:coq_settings = {
+        \ 'xdg': v:true,
+        \ 'clients': {
+        \   'snippets': {
+        \     'user_path': '~/.config/nvim/snippets',
+        \   },
+        \ },
+        \}
     '';
 
     vim.nnoremap = {
@@ -48,11 +55,9 @@ in {
     };
 
     vim.luaConfigRC = ''
-    ${if cfg.coq then ''
-    vim.g.coq_settings = {
-      xdg = true
-    } 
-    '' else ""}
+      ${if cfg.coq then ''
+      '' else ""}
+
       ${if cfg.bash then "" else ""}
 
       ${if cfg.nix then "" else ""}

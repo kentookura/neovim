@@ -146,14 +146,8 @@
           vim.filetree.nvimTreeLua.enable = true;
         };
       };
-
     neovimBuilder = lib.neovimBuilder;
   in rec {
-
-    #overlays.default = final: prev: {
-    #  inherit neovimBuilder;
-    #  neovimKento = packages.${system}.neovimKento;
-    #};
     apps.default = lib.withDefaultSystems (system: {
       type = "app";
       program = "${self.defaultPackage."${system}"}/bin/nvim";
