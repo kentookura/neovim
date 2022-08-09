@@ -111,12 +111,19 @@
         config = {
           vim.viAlias = true;
           vim.vimAlias = true;
+          vim.configRC = builtins.readFile ./init.vim;
+
+          vim.editor.indentGuide = true;
 
           vim.theme.everforest.enable = true;
           vim.theme.everforest.underline = true;
           vim.theme.goyo.enable = true;
           vim.theme.limelight.enable = true;
           vim.theme.lightline.enable = true;
+
+          vim.disableArrows = true;
+          vim.syntaxHighlighting = true;
+          vim.lineNumberMode = "relNumber";
 
           vim.latex.enable = true;
           vim.latex.compiler.method = "latexmk";
@@ -130,6 +137,7 @@
           vim.lsp.vimscript = true;
           vim.lsp.tex = true;
           vim.lsp.lightbulb = true;
+          vim.lsp.coq = true;
 
           vim.filetree.nvimTreeLua.enable = true;
         };
@@ -138,10 +146,10 @@
     neovimBuilder = lib.neovimBuilder;
   in rec {
 
-    overlays.default = final: prev: {
-      inherit neovimBuilder;
-      neovimKento = packages.${system}.neovimKento;
-    };
+    #overlays.default = final: prev: {
+    #  inherit neovimBuilder;
+    #  neovimKento = packages.${system}.neovimKento;
+    #};
     apps.default = lib.withDefaultSystems (system: {
       type = "app";
       program = "${self.defaultPackage."${system}"}/bin/nvim";

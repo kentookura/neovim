@@ -23,6 +23,7 @@ in {
       #(if cfg.indentGuide then indent-blankline-nvim else null)
       #(if  to run make hexokinase in the plugin folder
       nvim-which-key
+      vim-nix
     ];
 
     vim.nnoremap = {

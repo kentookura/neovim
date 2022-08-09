@@ -17,18 +17,20 @@ in {
     tex = mkEnableOption "Enable tex support";
     
     lightbulb = mkEnableOption "Enable lightbulb";
-
+    coq = mkEnableOption "Enable coq";
   };
 
   config = mkIf cfg.enable {
     vim.startPlugins = with pkgs.neovimPlugins; [ 
       ultisnips
-      #(if cfg.lightbulb then nvim-lightbulb else null)
-      #(if cfg.lightbulb then fixcursorhold else null)
+      (if cfg.lightbulb then nvim-lightbulb else null)
+      (if cfg.lightbulb then fixcursorhold else null)
       nvim-lightbulb
       fixcursorhold
       nvim-dap
       nvim-lspconfig 
+      (if cfg.coq then coq-nvim else null)
+      (if cfg.coq then coq-artifacts else null)
 #      vim-nix
 #      vimtex
 #      (if cfg.nix then vim-nix else null)
@@ -46,6 +48,11 @@ in {
     };
 
     vim.luaConfigRC = ''
+    ${if cfg.coq then ''
+    vim.g.coq_settings = {
+      xdg = true
+    } 
+    '' else ""}
       ${if cfg.bash then "" else ""}
 
       ${if cfg.nix then "" else ""}
