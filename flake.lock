@@ -95,6 +95,38 @@
         "type": "github"
       }
     },
+    "fzf": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659970652,
+        "narHash": "sha256-gtRMoUEQEVoQXtA2PnVMLqrENUh5Jv8QiolqmeX5naQ=",
+        "owner": "junegunn",
+        "repo": "fzf",
+        "rev": "4993d19466d5f3ac127de5c0c461cde7ef1894d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "junegunn",
+        "repo": "fzf",
+        "type": "github"
+      }
+    },
+    "fzf-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660020470,
+        "narHash": "sha256-0vREp47x+S5tK7VWHxCmY5RVwzeT1vprHlJ9+cwQXBM=",
+        "owner": "junegunn",
+        "repo": "fzf.vim",
+        "rev": "c491d702b76c6b4918abb80be3cfb57d1b618ffa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "junegunn",
+        "repo": "fzf.vim",
+        "type": "github"
+      }
+    },
     "goyo": {
       "flake": false,
       "locked": {
@@ -422,6 +454,8 @@
         "coq-nvim": "coq-nvim",
         "everforest": "everforest",
         "fixcursorhold": "fixcursorhold",
+        "fzf": "fzf",
+        "fzf-vim": "fzf-vim",
         "goyo": "goyo",
         "lightline-gruvbox": "lightline-gruvbox",
         "lightline-vim": "lightline-vim",

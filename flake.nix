@@ -38,6 +38,8 @@
     lightline-gruvbox = { url = "github:shinchu/lightline-gruvbox.vim"; flake = false; };
     completion-nvim = { url = "github:nvim-lua/completion-nvim"; flake = false; };
     nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
+    fzf-vim = { url = "github:junegunn/fzf.vim"; flake = false; };
+    fzf = { url = "github:junegunn/fzf"; flake = false; };
   };
   outputs = { self, nixpkgs, neovim, rnix-lsp, ... }@inputs:
   let
@@ -70,6 +72,8 @@
       "vimwiki"
       "dkasak-gruvbox"
       "nvim-which-key"
+      "fzf"
+      "fzf-vim"
     ];
 
     pkgs = import nixpkgs {

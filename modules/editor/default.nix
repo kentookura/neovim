@@ -24,6 +24,8 @@ in {
       #(if  to run make hexokinase in the plugin folder
       nvim-which-key
       vim-nix
+      fzf
+      fzf-vim
     ];
 
     vim.nnoremap = {
