@@ -1,9 +1,11 @@
-
-{ pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-with builtins;
-
-let
+with builtins; let
   cfg = config.vim.theme.lightline;
 in {
   options.vim.theme.lightline = {
@@ -21,22 +23,24 @@ in {
     in {
       vim.startPlugins = with pkgs.neovimPlugins; [lightline-vim];
       vim.globals = {
-        "lightline"= lightCfg;
+        "lightline" = lightCfg;
       };
-  });
+    }
+  );
 }
-    #vim.globals = { "lightline" = ''
-    #    \{ 'colorscheme': 'everforest',
-    #    \  'separator': { 'left': '▓▒░', 'right': '░▒▓'  },
-    #    \  'subseparator': { 'left': '░', 'right': '░'  },
-    #    \  'active': {
-    #    \     'left': [ [ 'mode', 'paste'  ],
-    #    \               [ 'gitbranch', 'readonly', 'filename', 'modified' ]
-    #    \             ],
-    #    \     'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']]
-    #    \  },
-    #    \  'component_function': {
-    #    \    'gitbranch': 'FugitiveHead',
-    #    \  }
-    #    \}
-    #    '';
+#vim.globals = { "lightline" = ''
+#    \{ 'colorscheme': 'everforest',
+#    \  'separator': { 'left': '▓▒░', 'right': '░▒▓'  },
+#    \  'subseparator': { 'left': '░', 'right': '░'  },
+#    \  'active': {
+#    \     'left': [ [ 'mode', 'paste'  ],
+#    \               [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+#    \             ],
+#    \     'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']]
+#    \  },
+#    \  'component_function': {
+#    \    'gitbranch': 'FugitiveHead',
+#    \  }
+#    \}
+#    '';
+

@@ -1,5 +1,4 @@
-with builtins;
-rec {
+with builtins; rec {
   defaultSystems = [
     "aarch64-linux"
     "aarch64-darwin"
@@ -58,33 +57,50 @@ rec {
     "x86_64-genode"
   ];
 
-  evalMods = {allPkgs, systems ? defaultSystems, modules, args ?{}}: withSystems systems (sys: let
-    pkgs = allPkgs."${sys}";
-  in pkgs.lib.evalModules {
-    inherit modules;
-    specialArgs = { inherit pkgs;} // args;
-  });
+  evalMods = {
+    allPkgs,
+    systems ? defaultSystems,
+    modules,
+    args ? {},
+  }:
+    withSystems systems (sys: let
+      pkgs = allPkgs."${sys}";
+    in
+      pkgs.lib.evalModules {
+        inherit modules;
+        specialArgs = {inherit pkgs;} // args;
+      });
 
-  mkPkgs = {nixpkgs, systems ? defaultSystems, cfg ? {}, overlays ? []}: withSystems systems (sys: 
-  import nixpkgs { 
-    system = sys; 
-    config = cfg; 
-    overlays = overlays; 
-  });
+  mkPkgs = {
+    nixpkgs,
+    systems ? defaultSystems,
+    cfg ? {},
+    overlays ? [],
+  }:
+    withSystems systems (sys:
+      import nixpkgs {
+        system = sys;
+        config = cfg;
+        overlays = overlays;
+      });
 
   withDefaultSystems = withSystems defaultSystems;
-  withSystems = systems: f: foldl' (cur: nxt:
-  let
+  withSystems = systems: f: foldl' (cur: nxt: let
     ret = {
       "${nxt}" = f nxt;
     };
-  in cur // ret) {} systems;
+  in
+    cur // ret) {} systems;
 
-  neovimBuilder = {pkgs, config, ...}: let
+  neovimBuilder = {
+    pkgs,
+    config,
+    ...
+  }: let
     neovimPlugins = pkgs.neovimPlugins;
     vimOptions = pkgs.lib.evalModules {
       modules = [
-        { imports = [ ../modules]; }
+        {imports = [../modules];}
         config
       ];
 
@@ -94,16 +110,17 @@ rec {
     };
 
     vim = vimOptions.config.vim;
-  in pkgs.wrapNeovim pkgs.neovim-nightly {
-    viAlias = true;
-    vimAlias = true;
-    configure = {
-      customRC = vim.configRC;
+  in
+    pkgs.wrapNeovim pkgs.neovim-nightly {
+      viAlias = true;
+      vimAlias = true;
+      configure = {
+        customRC = vim.configRC;
 
-      packages.myVimPackage = with pkgs.vimPlugins; {
-        start = vim.startPlugins;
-        opt = vim.optPlugins;
+        packages.myVimPackage = with pkgs.vimPlugins; {
+          start = vim.startPlugins;
+          opt = vim.optPlugins;
+        };
       };
     };
-  };
 }

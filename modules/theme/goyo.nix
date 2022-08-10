@@ -1,8 +1,11 @@
-{ pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-with builtins;
-
-let
+with builtins; let
   cfg = config.vim.theme;
 in {
   options.vim.theme = {
@@ -14,12 +17,11 @@ in {
     };
   };
   config = {
-    vim.startPlugins = with pkgs.neovimPlugins; 
-      [ goyo ];
+    vim.startPlugins = with pkgs.neovimPlugins; [goyo];
     vim.configRC = ''
       autocmd! User GoyoEnter Limelight
       autocmd! User GoyoLeave Limelight!
-      '';
+    '';
 
     vim.nnoremap = {
       "<C-g>" = ":Goyo<CR>";

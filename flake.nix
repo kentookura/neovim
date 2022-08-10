@@ -8,41 +8,132 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    rnix-lsp = {url = "github:nix-community/rnix-lsp";};
 
-    rnix-lsp = { url = "github:nix-community/rnix-lsp"; };
-
-    goyo = { url = "github:junegunn/goyo.vim"; flake = false; };
-    everforest = { url = "github:sainnhe/everforest"; flake = false; };
-    limelight = { url = "github:junegunn/limelight.vim"; flake = false; };
-    yuck-vim = { url = "github:elkowar/yuck.vim"; flake = false; };
-    ultisnips = { url = "github:SirVer/ultisnips"; flake = false; };
-    coq-nvim = { url = "github:ms-jpq/coq_nvim"; flake = false; };
-    coq-artifacts = { url = "github:ms-jpq/coq.artifacts"; flake = false; };
-    nvim-tree-lua = { url = "github:kyazdani42/nvim-tree.lua"; flake = false; };
-    nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter"; flake = false;};
-    nvim-treesitter-context = { url = "github:romgrk/nvim-treesitter-context"; flake = false;};
-    vim-nix = { url = "github:LnL7/vim-nix"; flake = false; };
-    vimtex = { url = "github:lervag/vimtex"; flake = false; };
-    neomake = { url = "github:neomake/neomake"; flake = false; };
-    nvim-dap = { url = "github:mfussenegger/nvim-dap"; flake = false; };
-    telescope-dap = { url = "github:nvim-telescope/telescope-dap.nvim"; flake = false; };
-    nvim-dap-virtual-text = { url = "github:theHamsta/nvim-dap-virtual-text"; flake = false; };
-    neoformat = { url = "github:sbdchd/neoformat"; flake = false; };
-    nvim-lightbulb = { url = "github:kosayoda/nvim-lightbulb"; flake = false; };
-    fixcursorhold = { url = "github:antoinemadec/FixCursorHold.nvim"; flake = false; };
-    lightline-vim = { url = "github:itchyny/lightline.vim"; flake = false; };
-    vim-pandoc = { url = "github:vim-pandoc/vim-pandoc"; flake = false; };
-    vim-pandoc-syntax = { url = "github:vim-pandoc/vim-pandoc-syntax"; flake = false; };
-    vimwiki = { url = "github:vimwiki/vimwiki"; flake = false; };
-    nvim-lspconfig = { url = "github:neovim/nvim-lspconfig"; flake = false; };
-    lightline-gruvbox = { url = "github:shinchu/lightline-gruvbox.vim"; flake = false; };
-    completion-nvim = { url = "github:nvim-lua/completion-nvim"; flake = false; };
-    nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
-    fzf-vim = { url = "github:junegunn/fzf.vim"; flake = false; };
-    fzf = { url = "github:junegunn/fzf"; flake = false; };
+    goyo = {
+      url = "github:junegunn/goyo.vim";
+      flake = false;
+    };
+    everforest = {
+      url = "github:sainnhe/everforest";
+      flake = false;
+    };
+    limelight = {
+      url = "github:junegunn/limelight.vim";
+      flake = false;
+    };
+    yuck-vim = {
+      url = "github:elkowar/yuck.vim";
+      flake = false;
+    };
+    ultisnips = {
+      url = "github:SirVer/ultisnips";
+      flake = false;
+    };
+    coq-nvim = {
+      url = "github:ms-jpq/coq_nvim";
+      flake = false;
+    };
+    coq-artifacts = {
+      url = "github:ms-jpq/coq.artifacts";
+      flake = false;
+    };
+    nvim-tree-lua = {
+      url = "github:kyazdani42/nvim-tree.lua";
+      flake = false;
+    };
+    nvim-treesitter = {
+      url = "github:nvim-treesitter/nvim-treesitter";
+      flake = false;
+    };
+    nvim-treesitter-context = {
+      url = "github:romgrk/nvim-treesitter-context";
+      flake = false;
+    };
+    vim-nix = {
+      url = "github:LnL7/vim-nix";
+      flake = false;
+    };
+    vimtex = {
+      url = "github:lervag/vimtex";
+      flake = false;
+    };
+    neomake = {
+      url = "github:neomake/neomake";
+      flake = false;
+    };
+    nvim-dap = {
+      url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
+    telescope-dap = {
+      url = "github:nvim-telescope/telescope-dap.nvim";
+      flake = false;
+    };
+    nvim-dap-virtual-text = {
+      url = "github:theHamsta/nvim-dap-virtual-text";
+      flake = false;
+    };
+    neoformat = {
+      url = "github:sbdchd/neoformat";
+      flake = false;
+    };
+    nvim-lightbulb = {
+      url = "github:kosayoda/nvim-lightbulb";
+      flake = false;
+    };
+    fixcursorhold = {
+      url = "github:antoinemadec/FixCursorHold.nvim";
+      flake = false;
+    };
+    lightline-vim = {
+      url = "github:itchyny/lightline.vim";
+      flake = false;
+    };
+    vim-pandoc = {
+      url = "github:vim-pandoc/vim-pandoc";
+      flake = false;
+    };
+    vim-pandoc-syntax = {
+      url = "github:vim-pandoc/vim-pandoc-syntax";
+      flake = false;
+    };
+    vimwiki = {
+      url = "github:vimwiki/vimwiki";
+      flake = false;
+    };
+    nvim-lspconfig = {
+      url = "github:neovim/nvim-lspconfig";
+      flake = false;
+    };
+    lightline-gruvbox = {
+      url = "github:shinchu/lightline-gruvbox.vim";
+      flake = false;
+    };
+    completion-nvim = {
+      url = "github:nvim-lua/completion-nvim";
+      flake = false;
+    };
+    nvim-which-key = {
+      url = "github:folke/which-key.nvim";
+      flake = false;
+    };
+    fzf-vim = {
+      url = "github:junegunn/fzf.vim";
+      flake = false;
+    };
+    fzf = {
+      url = "github:junegunn/fzf";
+      flake = false;
+    };
   };
-  outputs = { self, nixpkgs, neovim, rnix-lsp, ... }@inputs:
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    neovim,
+    rnix-lsp,
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
     plugins = [
       "goyo"
@@ -90,18 +181,23 @@
     };
 
     pluginOverlay = top: last: let
-      buildPlug = name: top.vimUtils.buildVimPluginFrom2Nix {
-        pname = name;
-        version = "master";
-        src = builtins.getAttr name inputs;
-      };
+      buildPlug = name:
+        top.vimUtils.buildVimPluginFrom2Nix {
+          pname = name;
+          version = "master";
+          src = builtins.getAttr name inputs;
+        };
     in {
-      neovimPlugins = builtins.listToAttrs (map (name: { inherit name; value = buildPlug name; }) plugins);
+      neovimPlugins = builtins.listToAttrs (map (name: {
+          inherit name;
+          value = buildPlug name;
+        })
+        plugins);
     };
-    
-    allPkgs = lib.mkPkgs { 
-      inherit nixpkgs; 
-      cfg = { };
+
+    allPkgs = lib.mkPkgs {
+      inherit nixpkgs;
+      cfg = {};
       overlays = [
         pluginOverlay
         externalBitsOverlay
@@ -110,7 +206,8 @@
 
     lib = import ./lib;
 
-    mkNeoVimPkg = pkgs: lib.neovimBuilder {
+    mkNeoVimPkg = pkgs:
+      lib.neovimBuilder {
         inherit pkgs;
         config = {
           vim.viAlias = true;
@@ -118,6 +215,7 @@
           vim.configRC = builtins.readFile ./init.vim;
 
           vim.editor.indentGuide = true;
+          vim.editor.format = true;
 
           vim.theme.everforest.enable = true;
           vim.theme.everforest.underline = true;

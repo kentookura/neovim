@@ -1,8 +1,11 @@
-{ pkgs, lib, config, ...}:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-with builtins;
-
-let
+with builtins; let
   cfg = config.vim;
 in {
   options.vim = {
@@ -105,7 +108,7 @@ in {
     bell = mkOption {
       default = "none";
       description = "Set how bells are handled. Options: on, visual or none";
-      type = types.enum [ "none" "visual" "on" ];
+      type = types.enum ["none" "visual" "on"];
     };
 
     mapTimeout = mkOption {
@@ -125,121 +128,132 @@ in {
       description = "New splits will open to the right";
       type = types.bool;
     };
-
   };
 
   config = (
-    let 
-      writeIf = cond: msg: if cond then msg else "";
+    let
+      writeIf = cond: msg:
+        if cond
+        then msg
+        else "";
     in {
-    
-    vim.nmap = if (cfg.disableArrows) then {
-      "<up>" = "<nop>";
-      "<down>" = "<nop>";
-      "<left>" = "<nop>";
-      "<right>" = "<nop>";
-    } else {};
+      vim.nmap =
+        if (cfg.disableArrows)
+        then {
+          "<up>" = "<nop>";
+          "<down>" = "<nop>";
+          "<left>" = "<nop>";
+          "<right>" = "<nop>";
+        }
+        else {};
 
-    vim.imap = if (cfg.disableArrows) then {
-      "<up>" = "<nop>";
-      "<down>" = "<nop>";
-      "<left>" = "<nop>";
-      "<right>" = "<nop>";
-    } else {};
+      vim.imap =
+        if (cfg.disableArrows)
+        then {
+          "<up>" = "<nop>";
+          "<down>" = "<nop>";
+          "<left>" = "<nop>";
+          "<right>" = "<nop>";
+        }
+        else {};
 
-    vim.nnoremap = if (cfg.mapLeaderSpace) then {
-      "<space>" = "<nop>";
-    } else {};
+      vim.nnoremap =
+        if (cfg.mapLeaderSpace)
+        then {
+          "<space>" = "<nop>";
+        }
+        else {};
 
-    vim.configRC = ''
+      vim.configRC = ''
 
-      "Settings that are set for everything
-      set encoding=utf-8
-      set mouse=${cfg.mouseSupport}
-      set tabstop=${toString cfg.tabWidth}
-      set shiftwidth=${toString cfg.tabWidth}
-      set softtabstop=${toString cfg.tabWidth}
-      set expandtab
-      set cmdheight=${toString cfg.cmdHeight}
-      set updatetime=${toString cfg.updateTime}
-      set shortmess+=c
-      set tm=${toString cfg.mapTimeout}
-      set hidden
+        "Settings that are set for everything
+        set encoding=utf-8
+        set mouse=${cfg.mouseSupport}
+        set tabstop=${toString cfg.tabWidth}
+        set shiftwidth=${toString cfg.tabWidth}
+        set softtabstop=${toString cfg.tabWidth}
+        set expandtab
+        set cmdheight=${toString cfg.cmdHeight}
+        set updatetime=${toString cfg.updateTime}
+        set shortmess+=c
+        set tm=${toString cfg.mapTimeout}
+        set hidden
 
-      ${writeIf cfg.splitBelow ''
-        set splitbelow
-      ''}
+        ${writeIf cfg.splitBelow ''
+          set splitbelow
+        ''}
 
-      ${writeIf cfg.splitRight ''
-        set splitright
-      ''}
+        ${writeIf cfg.splitRight ''
+          set splitright
+        ''}
 
-      ${writeIf cfg.showSignColumn ''
-        set signcolumn=yes
-      ''}
+        ${writeIf cfg.showSignColumn ''
+          set signcolumn=yes
+        ''}
 
-      ${writeIf cfg.autoIndent ''
-        set ai
-      ''}
-            
-      ${writeIf cfg.preventJunkFiles ''
-        set noswapfile
-        set nobackup
-        set nowritebackup
-      ''}
+        ${writeIf cfg.autoIndent ''
+          set ai
+        ''}
 
-      ${writeIf (cfg.bell == "none") ''
-        set noerrorbells
-        set novisualbell
-      ''}
+        ${writeIf cfg.preventJunkFiles ''
+          set noswapfile
+          set nobackup
+          set nowritebackup
+        ''}
 
-      ${writeIf (cfg.bell == "on") ''
-        set novisualbell
-      ''}
+        ${writeIf (cfg.bell == "none") ''
+          set noerrorbells
+          set novisualbell
+        ''}
 
-      ${writeIf (cfg.bell == "visual") ''
-        set noerrorbells
-      ''}
+        ${writeIf (cfg.bell == "on") ''
+          set novisualbell
+        ''}
 
-      ${writeIf (cfg.lineNumberMode == "relative") ''
-        set relativenumber
-      ''}
+        ${writeIf (cfg.bell == "visual") ''
+          set noerrorbells
+        ''}
 
-      ${writeIf (cfg.lineNumberMode == "number") ''
-        set number
-      ''}
+        ${writeIf (cfg.lineNumberMode == "relative") ''
+          set relativenumber
+        ''}
 
-      ${writeIf (cfg.lineNumberMode == "relNumber") ''
-        set number relativenumber
-      ''}
+        ${writeIf (cfg.lineNumberMode == "number") ''
+          set number
+        ''}
 
-      ${writeIf cfg.useSystemClipboard ''
-        set clipboard+=unnamedplus
-      ''}
+        ${writeIf (cfg.lineNumberMode == "relNumber") ''
+          set number relativenumber
+        ''}
 
-      ${writeIf cfg.mapLeaderSpace ''
-        let mapleader=" "
-        let maplocalleader=" "
-      ''}
+        ${writeIf cfg.useSystemClipboard ''
+          set clipboard+=unnamedplus
+        ''}
 
-      ${writeIf cfg.syntaxHighlighting ''
-        syntax on 
-      ''}
+        ${writeIf cfg.mapLeaderSpace ''
+          let mapleader=" "
+          let maplocalleader=" "
+        ''}
 
-      ${writeIf (cfg.wordWrap == false) ''
-        set nowrap
-      ''}
+        ${writeIf cfg.syntaxHighlighting ''
+          syntax on
+        ''}
 
-      ${writeIf cfg.hideSearchHighlight ''
-        set nohlsearch
-        set incsearch
-      ''}
+        ${writeIf (cfg.wordWrap == false) ''
+          set nowrap
+        ''}
 
-      ${writeIf cfg.colourTerm ''
-        set termguicolors
-        set t_Co=256
-      ''}
+        ${writeIf cfg.hideSearchHighlight ''
+          set nohlsearch
+          set incsearch
+        ''}
 
-    '';
-  });
+        ${writeIf cfg.colourTerm ''
+          set termguicolors
+          set t_Co=256
+        ''}
+
+      '';
+    }
+  );
 }

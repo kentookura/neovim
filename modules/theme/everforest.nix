@@ -1,13 +1,33 @@
-{ pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-with builtins;
-
-let
+with builtins; let
   cfg = config.vim.theme.everforest;
   everforestPallete = [
-    "bg" "red" "green" "yellow" "blue" "purple" "aqua" "gray" 
-    "orange" "bg0" "bg1" "bg2" "bg3" "bg4"
-    "fg0" "fg1" "fg2" "fg3" "fg4" "none"
+    "bg"
+    "red"
+    "green"
+    "yellow"
+    "blue"
+    "purple"
+    "aqua"
+    "gray"
+    "orange"
+    "bg0"
+    "bg1"
+    "bg2"
+    "bg3"
+    "bg4"
+    "fg0"
+    "fg1"
+    "fg2"
+    "fg3"
+    "fg4"
+    "none"
   ];
 in {
   options.vim.theme.everforest = {
@@ -52,19 +72,19 @@ in {
     contrastDark = mkOption {
       default = "medium";
       description = "The contrast when in dark mode. Can be soft, medium or hard";
-      type = types.enum [ "soft" "medium" "hard"];
+      type = types.enum ["soft" "medium" "hard"];
     };
 
     contrastLight = mkOption {
       default = "medium";
       description = "The contrast when in light mode. Can be soft, medium or hard";
-      type = types.enum [ "soft" "medium" "hard"];
+      type = types.enum ["soft" "medium" "hard"];
     };
 
     hlsCursor = mkOption {
       default = "orange";
       description = "Everforest Pallete to assign to search highlight cursor";
-      type = types.enum everforestPallete; 
+      type = types.enum everforestPallete;
     };
 
     numberColumn = mkOption {
@@ -140,37 +160,44 @@ in {
     };
   };
 
-  config = mkIf (cfg.enable) 
-  (let
-    mkVimBool = val: if val then "1" else "0";
-    mkIfNotNone = val: if val == "none" then null else val;
-  in {
-    vim.configRC = ''
-      colorscheme everforest
-    '';
+  config =
+    mkIf (cfg.enable)
+    (let
+      mkVimBool = val:
+        if val
+        then "1"
+        else "0";
+      mkIfNotNone = val:
+        if val == "none"
+        then null
+        else val;
+    in {
+      vim.configRC = ''
+        colorscheme everforest
+      '';
 
-    vim.startPlugins = with pkgs.neovimPlugins; [everforest];
-    vim.globals = {
-      "everforest_bold" = mkVimBool cfg.bold;
-      "everforest_italic" = mkVimBool cfg.italic;
-      "everforest_transparent_bg" = mkVimBool cfg.transparentBackground;
-      "everforest_underline" = mkVimBool cfg.underline;
-      "everforest_undercurl" = mkVimBool cfg.undercurl;
-      "everforest_termcolors" = mkIfNotNone cfg.termColours;
-      "everforest_contrast_dark" = mkIfNotNone cfg.contrastDark;
-      "everforest_contrast_light" = mkIfNotNone cfg.contrastLight;
-      "everforest_hls_cursor" = mkIfNotNone cfg.hlsCursor;
-      "everforest_number_column" = mkIfNotNone cfg.numberColumn;
-      "everforest_sign_column" = mkIfNotNone cfg.signColumn;
-      "everforest_virt_split" = mkIfNotNone cfg.virticalSplit;
-      "everforest_italicize_comments" = mkVimBool cfg.italicComments;
-      "everforest_italicize_strings" = mkVimBool cfg.italicStrings;
-      "everforest_invert_selection" = mkVimBool cfg.invertSelected;
-      "everforest_invert_signs" = mkVimBool cfg.invertSigns;
-      "everforest_invert_ident_guides" = mkVimBool cfg.invertIdentGuides;
-      "everforest_invert_tabline" = mkVimBool cfg.invertTabline;
-      "everforest_improved_strings" = mkVimBool cfg.improvedStrings;
-      "everforest_improved_warnings" = mkVimBool cfg.improvedWarnings;
-    };
-  });
+      vim.startPlugins = with pkgs.neovimPlugins; [everforest];
+      vim.globals = {
+        "everforest_bold" = mkVimBool cfg.bold;
+        "everforest_italic" = mkVimBool cfg.italic;
+        "everforest_transparent_bg" = mkVimBool cfg.transparentBackground;
+        "everforest_underline" = mkVimBool cfg.underline;
+        "everforest_undercurl" = mkVimBool cfg.undercurl;
+        "everforest_termcolors" = mkIfNotNone cfg.termColours;
+        "everforest_contrast_dark" = mkIfNotNone cfg.contrastDark;
+        "everforest_contrast_light" = mkIfNotNone cfg.contrastLight;
+        "everforest_hls_cursor" = mkIfNotNone cfg.hlsCursor;
+        "everforest_number_column" = mkIfNotNone cfg.numberColumn;
+        "everforest_sign_column" = mkIfNotNone cfg.signColumn;
+        "everforest_virt_split" = mkIfNotNone cfg.virticalSplit;
+        "everforest_italicize_comments" = mkVimBool cfg.italicComments;
+        "everforest_italicize_strings" = mkVimBool cfg.italicStrings;
+        "everforest_invert_selection" = mkVimBool cfg.invertSelected;
+        "everforest_invert_signs" = mkVimBool cfg.invertSigns;
+        "everforest_invert_ident_guides" = mkVimBool cfg.invertIdentGuides;
+        "everforest_invert_tabline" = mkVimBool cfg.invertTabline;
+        "everforest_improved_strings" = mkVimBool cfg.improvedStrings;
+        "everforest_improved_warnings" = mkVimBool cfg.improvedWarnings;
+      };
+    });
 }

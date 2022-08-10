@@ -1,17 +1,19 @@
-{ pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-with builtins;
-
-let
+with builtins; let
   cfg = config.vim.test;
 in {
-
   options.vim.test = {
     enable = mkEnableOption "Enable unit test support";
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = with pkgs.neovimPlugins; [ 
+    vim.startPlugins = with pkgs.neovimPlugins; [
       vim-test
     ];
 
@@ -22,6 +24,5 @@ in {
     vim.configRC = ''
       let test#strategy = "neovim"
     '';
-
   };
 }
