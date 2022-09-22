@@ -10,6 +10,10 @@
 
     rnix-lsp = {url = "github:nix-community/rnix-lsp";};
 
+    vim-surround = {
+      url = "github:tpope/vim-surround";
+      flake = false;
+    };
     goyo = {
       url = "github:junegunn/goyo.vim";
       flake = false;
@@ -136,6 +140,7 @@
   } @ inputs: let
     system = "x86_64-linux";
     plugins = [
+      "vim-surround"
       "goyo"
       "everforest"
       "yuck-vim"
@@ -209,39 +214,64 @@
     mkNeoVimPkg = pkgs:
       lib.neovimBuilder {
         inherit pkgs;
-        config = {
-          vim.viAlias = true;
-          vim.vimAlias = true;
-          vim.configRC = builtins.readFile ./init.vim;
+        config.vim = {
+          viAlias = true;
+          vimAlias = true;
+          configRC = builtins.readFile ./init.vim;
+          globals = {
+            lasttab = 1;
+            AutoPairsMapCh = 0;
+          };
+          nnoremap = {};
+          inoremap = {};
+          vnoremap = {};
+          xnoremap = {};
+          snoremap = {};
+          cnoremap = {};
+          onoremap = {};
+          tnoremap = {};
+          nmap = {};
+          imap = {};
+          vmap = {};
+          xmap = {};
+          smap = {};
+          cmap = {};
+          omap = {};
+          tmap = {};
 
-          vim.editor.indentGuide = true;
-          vim.editor.format = true;
+          disableArrows = true;
+          syntaxHighlighting = true;
+          lineNumberMode = "relNumber";
 
-          vim.theme.everforest.enable = true;
-          vim.theme.everforest.underline = true;
-          vim.theme.goyo.enable = true;
-          vim.theme.limelight.enable = true;
-          vim.theme.lightline.enable = true;
+          editor.indentGuide = true;
+          editor.format = true;
+          editor.fzf = true;
 
-          vim.disableArrows = true;
-          vim.syntaxHighlighting = true;
-          vim.lineNumberMode = "relNumber";
+          filetree.enable = true;
+          filetree.hideFiles = [".git"];
+          filetree.hideIgnoredGitFiles = true;
 
-          vim.latex.enable = true;
-          vim.latex.compiler.method = "latexmk";
-          vim.latex.viewer.enable = true;
-          vim.latex.viewer.method = "zathura";
-          vim.latex.viewer.options = "'-reuse-instance -forward-search @tex @line @pdf'";
+          theme.everforest.enable = true;
+          theme.everforest.underline = true;
+          theme.goyo.enable = true;
+          theme.limelight.enable = true;
+          theme.lightline.enable = true;
+          theme.lightline.theme = "everforest";
 
-          vim.lsp.enable = true;
-          vim.lsp.bash = true;
-          vim.lsp.nix = true;
-          vim.lsp.vimscript = true;
-          vim.lsp.tex = true;
-          vim.lsp.lightbulb = true;
-          vim.lsp.coq = true;
+          latex.enable = true;
+          latex.compiler.method = "latexmk";
+          latex.viewer.enable = true;
+          latex.viewer.method = "zathura";
+          latex.quickfix.enable = true;
+          latex.quickfix.autoOpen = false;
 
-          vim.filetree.nvimTreeLua.enable = true;
+          lsp.enable = true;
+          lsp.bash = true;
+          lsp.nix = true;
+          lsp.vimscript = true;
+          lsp.tex = true;
+          lsp.lightbulb = true;
+          lsp.coq = true;
         };
       };
     neovimBuilder = lib.neovimBuilder;
@@ -252,6 +282,10 @@
     });
 
     defaultPackage = lib.withDefaultSystems (system: self.packages."${system}".neovimKento);
+
+    #overlays.default = final: prev: {
+    #  neovim = neovimKento;
+    #};
 
     packages = lib.withDefaultSystems (system: {
       neovimKento = mkNeoVimPkg allPkgs."${system}";

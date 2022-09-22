@@ -26,6 +26,12 @@ in {
         type = types.enum ["latexmk" "latexrun" "tectonic" "arara" "generic"];
       };
     };
+    toc = {
+      enable = mkEnableOption "Enable Table of Contents";
+      layers = mkOption {
+        type = types.attrs;
+      };
+    };
     viewer = {
       enable = mkEnableOption "Enable pdf viewing";
       method = mkOption {
@@ -50,6 +56,14 @@ in {
         type = types.str;
       };
     };
+    quickfix = {
+      enable = mkEnableOption "enable quickfix";
+      autoOpen = mkOption {
+        description = "Automatically open quickfix window";
+        default = false;
+        type = types.bool;
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -59,58 +73,21 @@ in {
     vim.globals = {
       "vimtex_compiler_method" = mkIfNotNone cfg.compiler.method;
       "vimtex_view_enabled" = 1;
-      "vimtex_view_method" = "zathura";
+      "vimtex_view_method" = mkIfNotNone cfg.viewer.method;
       #"vimtex_view_automatic" = 1;
       #"vimtex_view_forward_search_on_start" = 1;
       #"vimtex_view_zathura_options" = "-d out -reuse-instance -forward-search @tex @line @pdf";
       "vimtex_syntax_enabled" = 1;
+      "vimtex_quickfix_enabled" = mkVimBool cfg.quickfix.enable;
+      "vimtex_quickfix_mode" = mkVimBool cfg.quickfix.autoOpen;
     };
-    vim.configRC = ''
-      "---------------------------------latex-----------------------------------
-      let g:vimtex_compiler_latexmk = {
-        \ 'build_dir': 'out',
-        \ 'callback' : 1,
-        \ 'continuous' : 1,
-        \ 'executable' : 'latexmk',
-        \ 'hooks' : [],
-        \ 'options' :[
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-        \   '-pdf -lualatex',
-        \   '-usepretex',
-        \  ],
-        \ }
+    vim.nmap = {
+      "<leader>v" = "<plug>(vimtex-view)";
+      "<leader>l" = "<plug>(vimtex-compile)";
+      "<leader>e" = "<Plug>(vimtex-errors)";
+      "<C-t>" = "<plug>(vimtex-toc-toggle)";
+    };
 
-      augroup vimtex_event_1
-        au!
-        au User VimtexEventQuit VimtexClean
-        au User VimtexEventInitPost VimtexCompile
-      augroup END
-
-      if empty(v:servername) && exists('*remote_startserver')
-        call remote_startserver('VIM')
-      endif
-
-      autocmd FileType tex set breakindent
-      autocmd FileType tex nnoremap k gk
-      autocmd FileType tex nnoremap j gj
-      autocmd FileType tex set wrap linebreak
-
-      autocmd FileType tex omap am <Plug>(vimtex-a$)
-      autocmd FileType tex xmap am <Plug>(vimtex-a$)
-      autocmd FileType tex omap im <Plug>(vimtex-i$)
-      autocmd FileType tex xmap im <Plug>(vimtex-i$)
-
-      autocmd FileType tex omap ai <Plug>(vimtex-am)
-      autocmd FileType tex omap ai <Plug>(vimtex-am)
-      autocmd FileType tex omap ii <Plug>(vimtex-ai)
-      autocmd FileType tex omap ii <Plug>(vimtex-ai)
-
-      map <leader>v <plug>(vimtex-view)
-      map <leader>l <plug>(vimtex-compile)
-      map <leader>e <Plug>(vimtex-errors)
-      map <C-t> <plug>(vimtex-toc-toggle)
-
-    '';
+    vim.configRC = builtins.readFile ./latex.vim;
   };
 }

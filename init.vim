@@ -74,7 +74,6 @@ map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 map <leader>t<leader> :tabnext<cr>
 
-let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 "au TabLeave * g:lasttab = tabpagenr()
 
@@ -82,8 +81,9 @@ nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
+nnoremap <NL> i<CR><ESC>
+
 " movement
-let g:AutoPairsMapCh = 0
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -163,6 +163,3 @@ augroup pandoc_syntax
   au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 augroup END
 
-let g:markdown_fenced_languages = ['html', 'haskell']
-let g:vim_markdown_math=1
-let g:vim_markdown_frontmatter=1

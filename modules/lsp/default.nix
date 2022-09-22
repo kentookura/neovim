@@ -59,14 +59,22 @@ in {
     ];
 
     vim.configRC = ''
-      let g:coq_settings = {
-        \ 'xdg': v:true,
-        \ 'clients': {
-        \   'snippets': {
-        \     'user_path': '~/.config/nvim/snippets',
-        \   },
-        \ },
-        \}
+      ${
+        if cfg.coq
+        then ''
+          let g:coq_settings = {
+            \ 'auto_start': v:true,
+            \ 'xdg': v:true,
+            \ 'clients': {
+            \   'snippets': {
+            \     'user_path': '~/.config/nvim/snippets',
+            \   },
+            \ },
+            \}
+
+        ''
+        else ""
+      }
     '';
 
     vim.nnoremap = {
@@ -76,12 +84,6 @@ in {
     };
 
     vim.luaConfigRC = ''
-      ${
-        if cfg.coq
-        then ''
-        ''
-        else ""
-      }
 
       ${
         if cfg.bash
