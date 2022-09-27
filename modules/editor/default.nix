@@ -46,11 +46,6 @@ in {
         then fzf
         else null
       )
-      #(
-      #  if cfg.colorPreview
-      #  then hexokinase
-      #  else null
-      #)
       (
         if cfg.fzf
         then fzf-vim

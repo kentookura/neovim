@@ -159,18 +159,6 @@
         "type": "github"
       }
     },
-    "hexokinase": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-C6Zfz24OFQdoQBoURLBPoUPR5evYPIavOOVH2LO9bkE=",
-        "type": "file",
-        "url": "https://github.com/RRethy/hexokinase"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/RRethy/hexokinase"
-      }
-    },
     "himalaya": {
       "flake": false,
       "locked": {
@@ -511,7 +499,6 @@
         "fzf": "fzf",
         "fzf-vim": "fzf-vim",
         "goyo": "goyo",
-        "hexokinase": "hexokinase",
         "himalaya": "himalaya",
         "lightline-gruvbox": "lightline-gruvbox",
         "lightline-vim": "lightline-vim",
@@ -532,6 +519,7 @@
         "rnix-lsp": "rnix-lsp",
         "telescope-dap": "telescope-dap",
         "ultisnips": "ultisnips",
+        "vim-hexokinase": "vim-hexokinase",
         "vim-nix": "vim-nix",
         "vim-pandoc": "vim-pandoc",
         "vim-pandoc-syntax": "vim-pandoc-syntax",
@@ -586,6 +574,18 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "type": "github"
+      }
+    },
+    "vim-hexokinase": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-DbG+cKR16htaRoftRzlDPBW0Czd0priD1UFucjI1x9s=",
+        "type": "file",
+        "url": "https://github.com/RRethy/hexokinase"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/RRethy/hexokinase"
       }
     },
     "vim-nix": {

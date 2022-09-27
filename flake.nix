@@ -10,8 +10,8 @@
     calendar-vim.url = "github:itchyny/calendar.vim";
     calendar-vim.flake = false;
 
-    hexokinase.url = "https://github.com/RRethy/hexokinase";
-    hexokinase.flake = false;
+    vim-hexokinase.url = "https://github.com/RRethy/hexokinase";
+    vim-hexokinase.flake = false;
 
     purescript-vim.url = "https://github.com/purescript-contrib/purescript-vim";
     purescript-vim.flake = false;
@@ -120,7 +120,6 @@
     system = "x86_64-linux";
     plugins = [
       "calendar-vim"
-      #"hexokinase"
       "purescript-vim"
       "himalaya"
       "vim-surround"
