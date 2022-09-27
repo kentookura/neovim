@@ -13,5 +13,6 @@
     ./filetree
     ./test
     ./latex
+    ./purescript
   ];
 }

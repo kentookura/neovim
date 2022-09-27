@@ -2,135 +2,114 @@
   description = "Kento's Neovim config";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    rnix-lsp.url = "github:nix-community/rnix-lsp";
 
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    neovim. url = "github:neovim/neovim?dir=contrib";
+    neovim.inputs.nixpkgs.follows = "nixpkgs";
 
-    rnix-lsp = {url = "github:nix-community/rnix-lsp";};
+    calendar-vim.url = "github:itchyny/calendar.vim";
+    calendar-vim.flake = false;
 
-    vim-surround = {
-      url = "github:tpope/vim-surround";
-      flake = false;
-    };
-    goyo = {
-      url = "github:junegunn/goyo.vim";
-      flake = false;
-    };
-    everforest = {
-      url = "github:sainnhe/everforest";
-      flake = false;
-    };
-    limelight = {
-      url = "github:junegunn/limelight.vim";
-      flake = false;
-    };
-    yuck-vim = {
-      url = "github:elkowar/yuck.vim";
-      flake = false;
-    };
-    ultisnips = {
-      url = "github:SirVer/ultisnips";
-      flake = false;
-    };
-    coq-nvim = {
-      url = "github:ms-jpq/coq_nvim";
-      flake = false;
-    };
-    coq-artifacts = {
-      url = "github:ms-jpq/coq.artifacts";
-      flake = false;
-    };
-    nvim-tree-lua = {
-      url = "github:kyazdani42/nvim-tree.lua";
-      flake = false;
-    };
-    nvim-treesitter = {
-      url = "github:nvim-treesitter/nvim-treesitter";
-      flake = false;
-    };
-    nvim-treesitter-context = {
-      url = "github:romgrk/nvim-treesitter-context";
-      flake = false;
-    };
-    vim-nix = {
-      url = "github:LnL7/vim-nix";
-      flake = false;
-    };
-    vimtex = {
-      url = "github:lervag/vimtex";
-      flake = false;
-    };
-    neomake = {
-      url = "github:neomake/neomake";
-      flake = false;
-    };
-    nvim-dap = {
-      url = "github:mfussenegger/nvim-dap";
-      flake = false;
-    };
-    telescope-dap = {
-      url = "github:nvim-telescope/telescope-dap.nvim";
-      flake = false;
-    };
-    nvim-dap-virtual-text = {
-      url = "github:theHamsta/nvim-dap-virtual-text";
-      flake = false;
-    };
-    neoformat = {
-      url = "github:sbdchd/neoformat";
-      flake = false;
-    };
-    nvim-lightbulb = {
-      url = "github:kosayoda/nvim-lightbulb";
-      flake = false;
-    };
-    fixcursorhold = {
-      url = "github:antoinemadec/FixCursorHold.nvim";
-      flake = false;
-    };
-    lightline-vim = {
-      url = "github:itchyny/lightline.vim";
-      flake = false;
-    };
-    vim-pandoc = {
-      url = "github:vim-pandoc/vim-pandoc";
-      flake = false;
-    };
-    vim-pandoc-syntax = {
-      url = "github:vim-pandoc/vim-pandoc-syntax";
-      flake = false;
-    };
-    vimwiki = {
-      url = "github:vimwiki/vimwiki";
-      flake = false;
-    };
-    nvim-lspconfig = {
-      url = "github:neovim/nvim-lspconfig";
-      flake = false;
-    };
-    lightline-gruvbox = {
-      url = "github:shinchu/lightline-gruvbox.vim";
-      flake = false;
-    };
-    completion-nvim = {
-      url = "github:nvim-lua/completion-nvim";
-      flake = false;
-    };
-    nvim-which-key = {
-      url = "github:folke/which-key.nvim";
-      flake = false;
-    };
-    fzf-vim = {
-      url = "github:junegunn/fzf.vim";
-      flake = false;
-    };
-    fzf = {
-      url = "github:junegunn/fzf";
-      flake = false;
-    };
+    hexokinase.url = "https://github.com/RRethy/hexokinase";
+    hexokinase.flake = false;
+
+    purescript-vim.url = "https://github.com/purescript-contrib/purescript-vim";
+    purescript-vim.flake = false;
+
+    himalaya.url = "path:/home/kento/himalaya";
+    himalaya.flake = false;
+
+    vim-surround.url = "github:tpope/vim-surround";
+    vim-surround.flake = false;
+
+    goyo.url = "github:junegunn/goyo.vim";
+    goyo.flake = false;
+
+    everforest.url = "github:sainnhe/everforest";
+    everforest.flake = false;
+
+    limelight.url = "github:junegunn/limelight.vim";
+    limelight.flake = false;
+
+    yuck-vim.url = "github:elkowar/yuck.vim";
+    yuck-vim.flake = false;
+
+    ultisnips.url = "github:SirVer/ultisnips";
+    ultisnips.flake = false;
+
+    coq-nvim.url = "github:ms-jpq/coq_nvim";
+    coq-nvim.flake = false;
+
+    coq-artifacts.url = "github:ms-jpq/coq.artifacts";
+    coq-artifacts.flake = false;
+
+    nvim-tree-lua.url = "github:kyazdani42/nvim-tree.lua";
+    nvim-tree-lua.flake = false;
+
+    nvim-treesitter.url = "github:nvim-treesitter/nvim-treesitter";
+    nvim-treesitter.flake = false;
+
+    nvim-treesitter-context.url = "github:romgrk/nvim-treesitter-context";
+    nvim-treesitter-context.flake = false;
+
+    vim-nix.url = "github:LnL7/vim-nix";
+    vim-nix.flake = false;
+
+    vimtex.url = "github:lervag/vimtex";
+    vimtex.flake = false;
+
+    neomake.url = "github:neomake/neomake";
+    neomake.flake = false;
+
+    nvim-dap.url = "github:mfussenegger/nvim-dap";
+    nvim-dap.flake = false;
+
+    telescope-dap.url = "github:nvim-telescope/telescope-dap.nvim";
+    telescope-dap.flake = false;
+
+    nvim-dap-virtual-text.url = "github:theHamsta/nvim-dap-virtual-text";
+    nvim-dap-virtual-text.flake = false;
+
+    neoformat.url = "github:sbdchd/neoformat";
+    neoformat.flake = false;
+
+    nvim-lightbulb.url = "github:kosayoda/nvim-lightbulb";
+    nvim-lightbulb.flake = false;
+
+    fixcursorhold.url = "github:antoinemadec/FixCursorHold.nvim";
+    fixcursorhold.flake = false;
+
+    lightline-vim.url = "github:itchyny/lightline.vim";
+    lightline-vim.flake = false;
+
+    vim-pandoc.url = "github:vim-pandoc/vim-pandoc";
+    vim-pandoc.flake = false;
+
+    vim-pandoc-syntax.url = "github:vim-pandoc/vim-pandoc-syntax";
+    vim-pandoc-syntax.flake = false;
+
+    vimwiki.url = "github:vimwiki/vimwiki";
+    vimwiki.flake = false;
+
+    nvim-lspconfig.url = "github:neovim/nvim-lspconfig";
+    nvim-lspconfig.flake = false;
+
+    lightline-gruvbox.url = "github:shinchu/lightline-gruvbox.vim";
+    lightline-gruvbox.flake = false;
+
+    completion-nvim.url = "github:nvim-lua/completion-nvim";
+    completion-nvim.flake = false;
+
+    nvim-which-key.url = "github:folke/which-key.nvim";
+    nvim-which-key.flake = false;
+
+    fzf-vim.url = "github:junegunn/fzf.vim";
+    fzf-vim.flake = false;
+
+    fzf.url = "github:junegunn/fzf";
+    fzf.flake = false;
   };
+
   outputs = {
     self,
     nixpkgs,
@@ -140,6 +119,10 @@
   } @ inputs: let
     system = "x86_64-linux";
     plugins = [
+      "calendar-vim"
+      #"hexokinase"
+      "purescript-vim"
+      "himalaya"
       "vim-surround"
       "goyo"
       "everforest"
@@ -193,11 +176,16 @@
           src = builtins.getAttr name inputs;
         };
     in {
-      neovimPlugins = builtins.listToAttrs (map (name: {
-          inherit name;
-          value = buildPlug name;
-        })
-        plugins);
+      neovimPlugins =
+        builtins.listToAttrs
+        (map
+          (
+            name: {
+              inherit name;
+              value = buildPlug name;
+            }
+          )
+          plugins);
     };
 
     allPkgs = lib.mkPkgs {
@@ -238,14 +226,17 @@
           cmap = {};
           omap = {};
           tmap = {};
+          startPlugins = with pkgs.neovimPlugins;
+          with pkgs.vimPlugins; [vim-hexokinase calendar-vim];
 
           disableArrows = true;
           syntaxHighlighting = true;
           lineNumberMode = "relNumber";
 
           editor.indentGuide = true;
-          editor.format = true;
+          editor.autoFormat = true;
           editor.fzf = true;
+          editor.colorPreview = true;
 
           filetree.enable = true;
           filetree.hideFiles = [".git"];
@@ -257,6 +248,8 @@
           theme.limelight.enable = true;
           theme.lightline.enable = true;
           theme.lightline.theme = "everforest";
+
+          purescript.enable = false;
 
           latex.enable = true;
           latex.compiler.method = "latexmk";

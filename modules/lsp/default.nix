@@ -53,29 +53,9 @@ in {
         then vim-nix
         else null
       )
-      #      (if cfg.nix then vim-nix else null)
-      #      nvim-treesitter
-      #      nvim-treesitter-context
     ];
 
-    vim.configRC = ''
-      ${
-        if cfg.coq
-        then ''
-          let g:coq_settings = {
-            \ 'auto_start': v:true,
-            \ 'xdg': v:true,
-            \ 'clients': {
-            \   'snippets': {
-            \     'user_path': '~/.config/nvim/snippets',
-            \   },
-            \ },
-            \}
-
-        ''
-        else ""
-      }
-    '';
+    vim.configRC = "";
 
     vim.nnoremap = {
     };
@@ -83,59 +63,7 @@ in {
     vim.globals = {
     };
 
-    vim.luaConfigRC = ''
-
-      ${
-        if cfg.bash
-        then ""
-        else ""
-      }
-
-      ${
-        if cfg.nix
-        then ""
-        else ""
-      }
-
-      ${
-        if cfg.vimscript
-        then ""
-        else ""
-      }
-
-      ${
-        if cfg.lightbulb
-        then ''
-          require('nvim-lightbulb').setup({
-            sign = {
-              enabled = true,
-              priority = 10,
-            },
-            status_text ={
-              enabled = true,
-            },
-          })
-          vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]
-        ''
-        else ""
-      }
-
-      ${
-        if cfg.tex
-        then ''
-          require'lspconfig'.texlab.setup({
-          cmd = { "texlab" },
-          settings = {
-            texlab = {
-              chktex = {
-                onEdit = false,
-                onOpenAndSave = false},
-              },
-            },
-          })
-        ''
-        else ""
-      }
-    '';
+    vim.luaConfigRC =
+      builtins.readFile ./coq.lua;
   };
 }

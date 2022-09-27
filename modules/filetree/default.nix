@@ -119,6 +119,11 @@ in {
         nvim-tree-lua
       ];
 
+      vim.configRC = ''
+        autocmd ColorScheme * highlight highlight NvimTreeBg guibg=#2B4252
+        autocmd FileType NvimTree setlocal winhighlight=Normal:NvimTreeBg
+      '';
+
       vim.luaConfigRC = ''
         local wk = require("which-key")
         wk.register({

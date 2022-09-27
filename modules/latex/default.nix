@@ -74,9 +74,6 @@ in {
       "vimtex_compiler_method" = mkIfNotNone cfg.compiler.method;
       "vimtex_view_enabled" = 1;
       "vimtex_view_method" = mkIfNotNone cfg.viewer.method;
-      #"vimtex_view_automatic" = 1;
-      #"vimtex_view_forward_search_on_start" = 1;
-      #"vimtex_view_zathura_options" = "-d out -reuse-instance -forward-search @tex @line @pdf";
       "vimtex_syntax_enabled" = 1;
       "vimtex_quickfix_enabled" = mkVimBool cfg.quickfix.enable;
       "vimtex_quickfix_mode" = mkVimBool cfg.quickfix.autoOpen;
@@ -87,7 +84,5 @@ in {
       "<leader>e" = "<Plug>(vimtex-errors)";
       "<C-t>" = "<plug>(vimtex-toc-toggle)";
     };
-
-    vim.configRC = builtins.readFile ./latex.vim;
   };
 }

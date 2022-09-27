@@ -10,20 +10,20 @@ let g:vimtex_toc_config = {
   \ },
  \ }
 
-let g:vimtex_compiler_latexmk = {
-  \ 'build_dir': 'out',
-  \ 'callback' : 1,
-  \ 'continuous' : 1,
-  \ 'executable' : 'latexmk',
-  \ 'hooks' : [],
-  \ 'options' :[
-  \   '-synctex=1',
-  \   '-interaction=nonstopmode',
-  \   '-pdf -lualatex',
-  \   '-usepretex',
-  \  ],
-  \ }
-
+"let g:vimtex_compiler_latexmk = {
+"  \ 'build_dir': 'out',
+"  \ 'callback' : 1,
+"  \ 'continuous' : 1,
+"  \ 'executable' : 'latexmk',
+"  \ 'hooks' : [],
+"  \ 'options' :[
+"  \   '-synctex=1',
+"  \   '-interaction=nonstopmode',
+"  \   '-pdf -lualatex',
+"  \   '-usepretex',
+"  \  ],
+"  \ }
+"
 augroup vimtex_event_1
   au!
   au User VimtexEventQuit VimtexClean

@@ -42,7 +42,7 @@ set nu rnu
 
 colorscheme everforest
 
-filetype indent plugin on
+filetype indent plugin off
 syntax on
 let mapleader = "\\"
 autocmd FocusGained, BufEnter * checktime
@@ -120,8 +120,6 @@ map <silent> <cr> :noh<cr>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
 inoremap <C-h> <C-o>h
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
@@ -144,22 +142,10 @@ set fillchars+=eob:\
 
 autocmd VimEnter * wincmd p
 autocmd BufNewFile,BufRead *.md let maplocalleader = "\\"
-autocmd BufNewFile,BufRead *.tex let maplocalleader = "\\"
-
-augroup Syntax
-autocmd BufEnter xmenu* setlocal noexpandtab tabstop=4
-  autocmd BufNewFile,BufRead *.config set syntax=sh
-  autocmd BufNewFile,BufRead *.conf set syntax=sh
-  autocmd BufNewFile,BufRead *.cfg set syntax=sh
-  autocmd BufNewFile,BufRead *.rc set syntax=sh
-  autocmd BufNewFile,BufRead *.shellrc set syntax=sh
-  autocmd BufNewFile,BufRead .xinitrc set syntax=sh
-  autocmd BufNewFile,BufRead xmobar* set syntax=haskell
-augroup END
 
 "----------------------------markdown/pandoc------------------------------
 
 augroup pandoc_syntax
-  au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+  au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc tw=80
 augroup END
 
