@@ -10,10 +10,10 @@
     calendar-vim.url = "github:itchyny/calendar.vim";
     calendar-vim.flake = false;
 
-    vim-hexokinase.url = "github.com:RRethy/hexokinase";
+    vim-hexokinase.url = "github:RRethy/hexokinase";
     vim-hexokinase.flake = false;
 
-    purescript-vim.url = "github.com:purescript-contrib/purescript-vim";
+    purescript-vim.url = "github:purescript-contrib/purescript-vim";
     purescript-vim.flake = false;
 
     himalaya.url = "path:/home/kento/himalaya";
