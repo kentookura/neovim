@@ -461,6 +461,22 @@
         "type": "github"
       }
     },
+    "purescript-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1655295095,
+        "narHash": "sha256-cd4SQGvN3fT+eRHKaxbf+UD5E/Au3DwwJ0pSFUkMaBc=",
+        "owner": "purescript-contrib",
+        "repo": "purescript-vim",
+        "rev": "af5fae0b43241e9fc3e0442782272728844bec3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "purescript-contrib",
+        "repo": "purescript-vim",
+        "type": "github"
+      }
+    },
     "rnix-lsp": {
       "inputs": {
         "naersk": "naersk",
@@ -508,9 +524,11 @@
         "nvim-treesitter": "nvim-treesitter",
         "nvim-treesitter-context": "nvim-treesitter-context",
         "nvim-which-key": "nvim-which-key",
+        "purescript-vim": "purescript-vim",
         "rnix-lsp": "rnix-lsp",
         "telescope-dap": "telescope-dap",
         "ultisnips": "ultisnips",
+        "vim-hexokinase": "vim-hexokinase",
         "vim-nix": "vim-nix",
         "vim-pandoc": "vim-pandoc",
         "vim-pandoc-syntax": "vim-pandoc-syntax",
@@ -564,6 +582,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "vim-hexokinase": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1598315912,
+        "narHash": "sha256-m+8G24WEzAXLWEDwxVmGOErECE1KV73tO3dvSByhwYw=",
+        "owner": "RRethy",
+        "repo": "hexokinase",
+        "rev": "11fc3efc6752b580083ea7891db8216377571b6d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "RRethy",
+        "repo": "hexokinase",
         "type": "github"
       }
     },

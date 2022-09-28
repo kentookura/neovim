@@ -157,7 +157,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
-      overlays = [inputs.neovim-overlay.overlay];
+      overlays = [];
     };
 
     externalBitsOverlay = top: last: {
@@ -261,13 +261,14 @@
       };
     neovimBuilder = lib.neovimBuilder;
   in rec {
+    devShells.${system}.default = import ./shell.nix {inherit pkgs;};
     apps.default = lib.withDefaultSystems (system: {
       type = "app";
       program = "${self.defaultPackage."${system}"}/bin/nvim";
     });
 
-    defaultPackage =
-      lib.withDefaultSystems (system: self.packages."${system}".neovimKento);
+    #packages."${system}".defaultPackage =
+    #  lib.withDefaultSystems (system: self.packages."${system}".neovimKento);
 
     #overlays.default = final: prev: {
     #  neovim = neovimKento;
