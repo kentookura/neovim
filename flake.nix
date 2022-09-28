@@ -4,7 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
 
-    neovim. url = "github:neovim/neovim?dir=contrib";
+    neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
     calendar-vim.url = "github:itchyny/calendar.vim";
@@ -16,7 +16,7 @@
     purescript-vim.url = "github:purescript-contrib/purescript-vim";
     purescript-vim.flake = false;
 
-    himalaya.url = "path:/home/kento/himalaya";
+    himalaya.url = "github:soywod/himalaya?dir=vim";
     himalaya.flake = false;
 
     vim-surround.url = "github:tpope/vim-surround";
@@ -157,9 +157,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
-      overlays = [
-        inputs.neovim-overlay.overlay
-      ];
+      overlays = [inputs.neovim-overlay.overlay];
     };
 
     externalBitsOverlay = top: last: {
@@ -175,25 +173,17 @@
           src = builtins.getAttr name inputs;
         };
     in {
-      neovimPlugins =
-        builtins.listToAttrs
-        (map
-          (
-            name: {
-              inherit name;
-              value = buildPlug name;
-            }
-          )
-          plugins);
+      neovimPlugins = builtins.listToAttrs (map (name: {
+          inherit name;
+          value = buildPlug name;
+        })
+        plugins);
     };
 
     allPkgs = lib.mkPkgs {
       inherit nixpkgs;
       cfg = {};
-      overlays = [
-        pluginOverlay
-        externalBitsOverlay
-      ];
+      overlays = [pluginOverlay externalBitsOverlay];
     };
 
     lib = import ./lib;
@@ -226,7 +216,10 @@
           omap = {};
           tmap = {};
           startPlugins = with pkgs.neovimPlugins;
-          with pkgs.vimPlugins; [vim-hexokinase calendar-vim];
+          with pkgs.vimPlugins; [
+            vim-hexokinase
+            calendar-vim
+          ];
 
           disableArrows = true;
           syntaxHighlighting = true;
@@ -273,14 +266,15 @@
       program = "${self.defaultPackage."${system}"}/bin/nvim";
     });
 
-    defaultPackage = lib.withDefaultSystems (system: self.packages."${system}".neovimKento);
+    defaultPackage =
+      lib.withDefaultSystems (system: self.packages."${system}".neovimKento);
 
     #overlays.default = final: prev: {
     #  neovim = neovimKento;
     #};
 
-    packages = lib.withDefaultSystems (system: {
-      neovimKento = mkNeoVimPkg allPkgs."${system}";
-    });
+    packages =
+      lib.withDefaultSystems
+      (system: {neovimKento = mkNeoVimPkg allPkgs."${system}";});
   };
 }

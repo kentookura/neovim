@@ -64,6 +64,6 @@ in {
     };
 
     vim.luaConfigRC =
-      builtins.readFile ./coq.lua;
+      builtins.readFile ./coq.lua + builtins.readFile ./lsp.lua;
   };
 }
