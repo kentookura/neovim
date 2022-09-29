@@ -267,13 +267,6 @@
       program = "${self.defaultPackage."${system}"}/bin/nvim";
     });
 
-    #packages."${system}".defaultPackage =
-    #  lib.withDefaultSystems (system: self.packages."${system}".neovimKento);
-
-    #overlays.default = final: prev: {
-    #  neovim = neovimKento;
-    #};
-
     packages =
       lib.withDefaultSystems
       (system: {neovimKento = mkNeoVimPkg allPkgs."${system}";});

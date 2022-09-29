@@ -44,7 +44,7 @@ colorscheme everforest
 
 filetype indent plugin off
 syntax on
-let mapleader = "\\"
+let mapleader = " "
 autocmd FocusGained, BufEnter * checktime
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 nnoremap ! :!
