@@ -14,5 +14,6 @@
     ./test
     ./latex
     ./purescript
+    ./haskell
   ];
 }

@@ -188,6 +188,12 @@
 
     lib = import ./lib;
 
+    languageServers = pkgs: {
+      inherit pkgs;
+      haskell-language-server = pkgs.haskellPackages.haskell-language-server;
+      texlab = pkgs.texlab;
+    };
+
     mkNeoVimPkg = pkgs:
       lib.neovimBuilder {
         inherit pkgs;
@@ -241,7 +247,8 @@
           theme.lightline.enable = true;
           theme.lightline.theme = "everforest";
 
-          purescript.enable = false;
+          purescript.enable = true;
+          haskell.enable = true;
 
           latex.enable = true;
           latex.compiler.method = "latexmk";
@@ -262,13 +269,35 @@
     neovimBuilder = lib.neovimBuilder;
   in rec {
     devShells.${system}.default = import ./shell.nix {inherit pkgs;};
-    apps.default = lib.withDefaultSystems (system: {
-      type = "app";
-      program = "${self.defaultPackage."${system}"}/bin/nvim";
-    });
 
-    packages =
-      lib.withDefaultSystems
-      (system: {neovimKento = mkNeoVimPkg allPkgs."${system}";});
+    apps.${system} = rec {
+      nvim = {
+        type = "app";
+        program = "${packages.${system}.default}/bin/nvim";
+      };
+      default = nvim;
+    };
+
+    overlays.default = final: prev: {
+      inherit neovimBuilder;
+      neovim = packages.${system}.neovim;
+      neovimPlugins = pkgs.neovimPlugins;
+    };
+
+    packages.${system} = rec {
+      default = neovim;
+      neovim = mkNeoVimPkg allPkgs."${system}";
+      laguageServers = languageServers;
+    };
   };
+
+  #apps.default = lib.withDefaultSystems (system: {
+  #  type = "app";
+  #  program = "${self.defaultPackage."${system}"}/bin/nvim";
+  #});
+
+  #packages =
+  #  lib.withDefaultSystems
+  #  (system: {neovimKento = mkNeoVimPkg allPkgs."${system}";});
+  #};
 }
