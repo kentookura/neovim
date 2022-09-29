@@ -39,6 +39,7 @@ set showmatch
 set mat=2
 set backspace=indent,eol,start
 set nu rnu
+set wrap breakindent linebreak
 
 colorscheme everforest
 
