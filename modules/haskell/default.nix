@@ -29,7 +29,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    vim.luaConfigRC = "";
+    vim.luaConfigRC = builtins.readFile ./haskell.lua;
     vim.startPlugins = with pkgs.neovimPlugins; [
     ];
     vim.globals = {

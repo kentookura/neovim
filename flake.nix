@@ -7,6 +7,8 @@
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
+    vim-unison.url = "github:ceedubs/unison-nix";
+
     calendar-vim.url = "github:itchyny/calendar.vim";
     calendar-vim.flake = false;
 
@@ -115,10 +117,12 @@
     nixpkgs,
     neovim,
     rnix-lsp,
+    vim-unison,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     plugins = [
+      "vim-unison"
       "calendar-vim"
       "purescript-vim"
       "himalaya"
@@ -172,6 +176,7 @@
           version = "master";
           src = builtins.getAttr name inputs;
         };
+      vim-unison = vim-unison.packages."x86_64-linux".vim-unison;
     in {
       neovimPlugins = builtins.listToAttrs (map (name: {
           inherit name;
@@ -249,6 +254,7 @@
 
           purescript.enable = true;
           haskell.enable = true;
+          unison.enable = true;
 
           latex.enable = true;
           latex.compiler.method = "latexmk";
@@ -283,21 +289,37 @@
       neovim = packages.${system}.neovim;
       neovimPlugins = pkgs.neovimPlugins;
     };
+    nixosModules.default = {}: {
+      options = {};
+      config = {
+        packages = with pkgs; [
+          fzf
+          pstree # for vimtex
+          pplatex
+          sumneko-lua-language-server
+          pulp
+          silver-searcher
+          ctags
+          proselint
+        ];
+      };
+    };
 
-    packages.${system} = rec {
+    packages.${system} = with pkgs; rec {
       default = neovim;
       neovim = mkNeoVimPkg allPkgs."${system}";
-      laguageServers = languageServers;
+      inherit
+        texlab
+        haskell-language-server
+        fzf
+        pstree # for vimtex
+        pplatex
+        sumneko-lua-language-server
+        pulp
+        silver-searcher
+        ctags
+        proselint
+        ;
     };
   };
-
-  #apps.default = lib.withDefaultSystems (system: {
-  #  type = "app";
-  #  program = "${self.defaultPackage."${system}"}/bin/nvim";
-  #});
-
-  #packages =
-  #  lib.withDefaultSystems
-  #  (system: {neovimKento = mkNeoVimPkg allPkgs."${system}";});
-  #};
 }
