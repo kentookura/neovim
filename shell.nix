@@ -2,6 +2,8 @@
 in
   pkgs.mkShell {
     buildInputs = with pkgs; [
+      nodePackages.purescript-language-server
+      ltex-ls
       texlab
       haskell-language-server
       fzf

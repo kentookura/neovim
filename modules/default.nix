@@ -15,5 +15,6 @@
     ./latex
     ./purescript
     ./haskell
+    ./treesitter
   ];
 }

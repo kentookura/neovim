@@ -1,10 +1,3 @@
-"	        _
-"	 __   _(_)_ __ ___  _ __ ___ 
-"	 \ \ / / | '_ ` _ \| '__/ __|
-"	  \ V /| | | | | | | | | (__ 
-"	   \_/ |_|_| |_| |_|_|  \___|
-
-
 set autoread
 set termguicolors
 set laststatus=2
@@ -69,11 +62,11 @@ autocmd FileType help wincmd L
 
 map <leader>n :setlocal nu! rnu!<CR>
 
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext<cr>
+map <C-t>n :tabnew<cr>
+map <C-t>o :tabonly<cr>
+map <C-t>c :tabclose<cr>
+map <C-t>m :tabmove
+map <C-t><C-t> :tabnext<cr>
 
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 "au TabLeave * g:lasttab = tabpagenr()
@@ -131,18 +124,14 @@ nnoremap = :vertical resize +5<CR>
 nnoremap _ :bel resize +5<CR>
 nnoremap + :bel resize -5<CR>
 
-map <C-f> :Files<CR>
-map <C-b> :Buffers<CR>
-
 let g:ackprg = 'ag --vimgrep'
 let javaScript_fold=1
-set fillchars+=eob:\ 
 
 
 "----------------------------------autocmds--------------------------------
 
 autocmd VimEnter * wincmd p
-autocmd BufNewFile,BufRead *.md let maplocalleader = "\\"
+autocmd BufNewFile,BufRead *.md let maplocalleader = " "
 
 "----------------------------markdown/pandoc------------------------------
 
@@ -150,3 +139,4 @@ augroup pandoc_syntax
   au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc tw=80
 augroup END
 
+nnoremap gO :!zathura <cfile> &<CR>

@@ -1,6 +1,6 @@
 -- Setup lspconfig.
 local nvim_lsp = require('lspconfig')
-local servers = { 'ltex', 'sumneko_lua' }
+local servers = { 'texlab', 'sumneko_lua' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,

@@ -4,6 +4,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
 
+    zenmode.url = github:folke/zen-mode.nvim;
+    zenmode.flake = false;
+
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -157,12 +160,26 @@
       "fzf"
       "fzf-vim"
     ];
-
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
       overlays = [];
     };
+
+    packages = with pkgs; {
+      latex-language-server = texlab;
+      haskell-language-server = haskell-language-server;
+      finder =
+        fzf;
+    };
+    #pstree =
+    #pplatex =
+    #sumneko-lua-language-server =
+    #pulp =
+    #silver-searcher =
+    #ctags =
+    #proselint =
+    #purescript-language-server =
 
     externalBitsOverlay = top: last: {
       rnix-lsp = rnix-lsp.defaultPackage.${top.system};
@@ -192,12 +209,6 @@
     };
 
     lib = import ./lib;
-
-    languageServers = pkgs: {
-      inherit pkgs;
-      haskell-language-server = pkgs.haskellPackages.haskell-language-server;
-      texlab = pkgs.texlab;
-    };
 
     mkNeoVimPkg = pkgs:
       lib.neovimBuilder {
@@ -252,6 +263,7 @@
           theme.lightline.enable = true;
           theme.lightline.theme = "everforest";
 
+          treesitter.enable = true;
           purescript.enable = true;
           haskell.enable = true;
           unison.enable = true;
@@ -289,18 +301,11 @@
       neovim = packages.${system}.neovim;
       neovimPlugins = pkgs.neovimPlugins;
     };
+
     nixosModules.default = {}: {
       options = {};
       config = {
         packages = with pkgs; [
-          fzf
-          pstree # for vimtex
-          pplatex
-          sumneko-lua-language-server
-          pulp
-          silver-searcher
-          ctags
-          proselint
         ];
       };
     };
@@ -308,18 +313,6 @@
     packages.${system} = with pkgs; rec {
       default = neovim;
       neovim = mkNeoVimPkg allPkgs."${system}";
-      inherit
-        texlab
-        haskell-language-server
-        fzf
-        pstree # for vimtex
-        pplatex
-        sumneko-lua-language-server
-        pulp
-        silver-searcher
-        ctags
-        proselint
-        ;
     };
   };
 }
