@@ -14,6 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     vim.startPlugins = with pkgs.neovimPlugins; [
+      purescript-vim
     ];
     vim.luaConfigRC = builtins.readFile ./purescript.lua;
   };

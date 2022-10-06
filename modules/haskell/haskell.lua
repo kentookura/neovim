@@ -1,24 +1,5 @@
 -- Setup lspconfig.
 local nvim_lsp = require('lspconfig')
-local servers = { 'texlab', 'sumneko_lua' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    capabilities = capabilities,
-  }
-end
-
-nvim_lsp['sumneko_lua'].setup {
-  cmd = {  "lua-language-server" },
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' }
-      }
-    }
-  }
-}
-
 -- haskell
 local util = require 'lspconfig.util'
 nvim_lsp['hls'].setup{

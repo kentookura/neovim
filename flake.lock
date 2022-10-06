@@ -583,7 +583,8 @@
         "vim-unison": "vim-unison",
         "vimtex": "vimtex",
         "vimwiki": "vimwiki",
-        "yuck-vim": "yuck-vim"
+        "yuck-vim": "yuck-vim",
+        "zenmode": "zenmode"
       }
     },
     "telescope-dap": {
@@ -795,6 +796,22 @@
       "original": {
         "owner": "elkowar",
         "repo": "yuck.vim",
+        "type": "github"
+      }
+    },
+    "zenmode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662368212,
+        "narHash": "sha256-n69FYW16uns+OXTsPCUeEPF5Z3dOJq997O/XTttpKBI=",
+        "owner": "folke",
+        "repo": "zen-mode.nvim",
+        "rev": "6f5702db4fd4a4c9a212f8de3b7b982f3d93b03c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "zen-mode.nvim",
         "type": "github"
       }
     }

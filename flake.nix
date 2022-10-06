@@ -169,8 +169,7 @@
     packages = with pkgs; {
       latex-language-server = texlab;
       haskell-language-server = haskell-language-server;
-      finder =
-        fzf;
+      finder = fzf;
     };
     #pstree =
     #pplatex =
@@ -282,6 +281,18 @@
           lsp.tex = true;
           lsp.lightbulb = true;
           lsp.coq = true;
+          # Available servers which I might find useful:
+          # bashls
+          # bufls
+          # dhall_lsp_server
+          # cssls
+          # dockerls
+          # eslint
+          # marksman
+          # ocamlls/ocamllsp
+          # purescriptls
+          # pyright/pyre/pylsp
+          # texlab
         };
       };
     neovimBuilder = lib.neovimBuilder;
