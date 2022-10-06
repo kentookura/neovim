@@ -298,6 +298,10 @@
     neovimBuilder = lib.neovimBuilder;
   in rec {
     devShells.${system}.default = import ./shell.nix {inherit pkgs;};
+    templates.default = {
+      path = ./templates/modules;
+      description = "Add a new Neovim module.";
+    };
 
     apps.${system} = rec {
       nvim = {
