@@ -12,6 +12,9 @@
 
     vim-unison.url = "github:ceedubs/unison-nix";
 
+    blamer-nvim.url = github:APZelos/blamer.nvim;
+    blamer-nvim.flake = false;
+
     calendar-vim.url = "github:itchyny/calendar.vim";
     calendar-vim.flake = false;
 
@@ -125,6 +128,7 @@
   } @ inputs: let
     system = "x86_64-linux";
     plugins = [
+      "blamer-nvim"
       "vim-unison"
       "calendar-vim"
       "purescript-vim"
@@ -240,6 +244,7 @@
           with pkgs.vimPlugins; [
             vim-hexokinase
             calendar-vim
+            blamer-nvim
           ];
 
           disableArrows = true;

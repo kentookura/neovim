@@ -17,7 +17,7 @@ with lib; {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
     vim.luaConfigRC = builtins.readFile ./haskell.lua;
     vim.startPlugins = with pkgs.neovimPlugins; [
     ];
