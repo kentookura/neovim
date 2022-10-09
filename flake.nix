@@ -286,6 +286,7 @@
           lsp.tex = true;
           lsp.lightbulb = true;
           lsp.coq = true;
+
           # Available servers which I might find useful:
           # bashls
           # bufls

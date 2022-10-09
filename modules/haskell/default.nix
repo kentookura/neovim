@@ -4,7 +4,9 @@
   lib,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.vim.haskell;
+in {
   options.vim.haskell = {
     enable = mkEnableOption "Enable latex support";
     lsp = {
@@ -17,13 +19,10 @@ with lib; {
     };
   };
 
-  config = {
+  config = mkIf (cfg.enable) {
     vim.luaConfigRC = builtins.readFile ./haskell.lua;
-    vim.startPlugins = with pkgs.neovimPlugins; [
-    ];
-    vim.globals = {
-    };
-    vim.nmap = {
-    };
+    vim.startPlugins = with pkgs.neovimPlugins; [];
+    vim.globals = {};
+    vim.nmap = {};
   };
 }
