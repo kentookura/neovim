@@ -16,5 +16,6 @@
     ./purescript
     ./haskell
     ./treesitter
+    ./unison
   ];
 }

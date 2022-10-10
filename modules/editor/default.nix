@@ -29,19 +29,10 @@ in {
         default = true;
       };
     };
-    unison = {
-      enable = mkEnableOption "Enable Unison support";
-    };
   };
 
   config = {
     vim.startPlugins = with pkgs.neovimPlugins; [
-      (
-        if cfg.unison.enable
-        then vim-unison
-        else null
-      )
-
       (
         if cfg.editor.mail
         then himalaya
@@ -87,7 +78,6 @@ in {
     '';
 
     vim.configRC = ''
-
         "${
         if cfg.editor.fzf
         then builtins.readFile ./fzf.vim

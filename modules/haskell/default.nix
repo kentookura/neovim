@@ -8,9 +8,9 @@ with lib; let
   cfg = config.vim.haskell;
 in {
   options.vim.haskell = {
-    enable = mkEnableOption "Enable latex support";
+    enable = mkEnableOption "Enable haskell support";
     lsp = {
-      enable = mkEnableOption "Enable compilation";
+      enable = mkEnableOption "Enable LSP";
       method = mkOption {
         default = "haskell-language-server";
         description = "compiler method used by vimtex";

@@ -323,7 +323,7 @@
       neovimPlugins = pkgs.neovimPlugins;
     };
 
-    nixosModules.default = {}: {
+    nixosModules.default = {config, ...}: {
       options = {};
       config = {
         packages = with pkgs; [
