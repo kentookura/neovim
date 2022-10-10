@@ -303,37 +303,45 @@
       };
     neovimBuilder = lib.neovimBuilder;
   in rec {
-    devShells.${system}.default = import ./shell.nix {inherit pkgs;};
-    templates.default = {
-      path = ./templates/modules;
-      description = "Add a new Neovim module.";
-    };
-
-    apps.${system} = rec {
-      nvim = {
-        type = "app";
-        program = "${packages.${system}.default}/bin/nvim";
-      };
-      default = nvim;
-    };
-
-    overlays.default = final: prev: {
-      inherit neovimBuilder;
-      neovim = packages.${system}.neovim;
-      neovimPlugins = pkgs.neovimPlugins;
-    };
-
-    nixosModules.default = {config, ...}: {
-      options = {};
-      config = {
-        packages = with pkgs; [
-        ];
-      };
-    };
-
-    packages.${system} = with pkgs; rec {
+    packages."x86_64-darwin" = with pkgs; rec {
       default = neovim;
-      neovim = mkNeoVimPkg allPkgs."${system}";
+      neovim = mkNeoVimPkg allPkgs."x86_64-darwin";
     };
+    packages."x86_64-linux" = with pkgs; rec {
+      default = neovim;
+      neovim = mkNeoVimPkg allPkgs."x86_64-linux";
+    };
+    #devShells.${system}.default = import ./shell.nix {inherit pkgs;};
+    #templates.default = {
+    #  path = ./templates/modules;
+    #  description = "Add a new Neovim module.";
+    #};
+
+    #apps."x86_64-linux".default = rec {
+    #  default = {
+    #    type = "app";
+    #    program = "${packages."x86_64-linux".default}/bin/nvim";
+    #  };
+    #};
+    #apps."x86_64-darwin".default = rec {
+    #  default = {
+    #    type = "app";
+    #    program = "${packages."x86_64-darwin".default}/bin/nvim";
+    #  };
+    #};
+
+    #overlays.default = final: prev: {
+    #  inherit neovimBuilder;
+    #  neovim = packages.${system}.neovim;
+    #  neovimPlugins = pkgs.neovimPlugins;
+    #};
+
+    #nixosModules.default = {}: {
+    #  options = {};
+    #  config = {
+    #    packages = with pkgs; [
+    #    ];
+    #  };
+    #};
   };
 }
