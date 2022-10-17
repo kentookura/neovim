@@ -4,6 +4,9 @@
     nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
     rnix-lsp.url = github:nix-community/rnix-lsp;
 
+    indent-blankline-nvim.url = github:lukas-reineke/indent-blankline.nvim;
+    indent-blankline-nvim.flake = false;
+
     lsp-colors-nvim.url = github:folke/lsp-colors.nvim;
     lsp-colors-nvim.flake = false;
 
@@ -75,6 +78,12 @@
     nvim-treesitter-context.url = "github:romgrk/nvim-treesitter-context";
     nvim-treesitter-context.flake = false;
 
+    nvim-treesitter-refactor.url = "github:nvim-treesitter/nvim-treesitter-refactor";
+    nvim-treesitter-refactor.flake = false;
+
+    nvim-treesitter-textobjects.url = "github:nvim-treesitter/nvim-treesitter-textobjects";
+    nvim-treesitter-textobjects.flake = false;
+
     vim-nix.url = "github:LnL7/vim-nix";
     vim-nix.flake = false;
 
@@ -141,6 +150,10 @@
     let
       system = "x86_64-linux";
       plugins = [
+        "nvim-treesitter-refactor"
+                                  
+        "nvim-treesitter-textobjects"
+        "indent-blankline-nvim"
         "lsp-colors-nvim"
         "trouble"
         "nvim-web-devicons"
@@ -241,13 +254,14 @@
                 mason-lspconfig
                 vim-hexokinase
                 calendar-vim
-                blamer-nvim
                 vim-markdown
               ];
 
             disableArrows = true;
             syntaxHighlighting = true;
             lineNumberMode = "relNumber";
+
+            git.enable = true;
 
             editor.indentGuide = true;
             editor.autoFormat = true;

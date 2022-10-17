@@ -7,6 +7,7 @@ local servers = {
           'dhall_lsp_server',
           'cssls',
           'dockerls',
+          'rnix',
           -- 'marksman',
           -- 'emmet_ls',
           'ocamlls',

@@ -12,5 +12,6 @@
     ./editor
     ./filetree
     ./test
+    ./git
   ];
 }

@@ -37,7 +37,19 @@ in
   };
 
   config = {
+    vim.nnoremap = {
+      "<leader>d" = ":TroubleToggle<CR>";
+      "<leader>wc" = "<cmd>close<cr>";
+      "<leader>ws" = "<cmd>split<cr>";
+      "<leader>wv" = "<cmd>vsplit<cr>";
+      "<C-f>" =        ":Files<CR>";
+      "<C-b>" =        ":Buffers<CR>";
+      "<C-g>" =        ":Rg<CR>";
+      "<leader>g" =    ":GGrep<CR>";
+    };
+
     vim.startPlugins = with pkgs.neovimPlugins; [
+      indent-blankline-nvim
       (
         if cfg.editor.trouble
         then trouble
@@ -69,13 +81,15 @@ in
       vim-nix
     ];
 
-    vim.nnoremap = {
-      "<leader>wc" = "<cmd>close<cr>";
-      "<leader>wh" = "<cmd>split<cr>";
-      "<leader>wv" = "<cmd>vsplit<cr>";
-    };
-
     vim.luaConfigRC = ''
+      vim.opt.list = true
+
+      require("indent_blankline").setup {
+        space_char_blankline = " ",
+        show_current_context = true,
+        show_current_context_start = true,
+      }
+
       ${
         if cfg.editor.trouble
         then builtins.readFile ./trouble.lua

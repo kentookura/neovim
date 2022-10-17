@@ -24,7 +24,6 @@ in {
     '';
 
     vim.nnoremap = {
-      "<C-g>" = ":Goyo<CR>";
     };
   };
 }
