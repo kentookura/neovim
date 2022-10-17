@@ -20,6 +20,11 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+nvim_lsp['cssls'].setup {
+  cmd = {  "css-languageserver --stdio" },
+  capabilities = capabilities,
+}
+
 nvim_lsp['sumneko_lua'].setup {
   cmd = {  "lua-language-server" },
   capabilities = capabilities,

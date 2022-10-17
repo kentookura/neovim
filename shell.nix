@@ -3,6 +3,7 @@ in
   pkgs.mkShell {
     buildInputs = with pkgs; [
       nodePackages.purescript-language-server
+      nodePackages.vscode-css-languageserver-bin
       ltex-ls
       texlab
       haskell-language-server

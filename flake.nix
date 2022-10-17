@@ -325,7 +325,7 @@
         };
       };
 
-      #devShells.${system}.default = import ./shell.nix {inherit pkgs;};
+      devShells.${system}.default = import ./shell.nix {inherit pkgs;};
       #templates.default = {
       #  path = ./templates/modules;
       #  description = "Add a new Neovim module.";
