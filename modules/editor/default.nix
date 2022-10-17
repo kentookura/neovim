@@ -45,7 +45,6 @@ in
       "<C-f>" =        ":Files<CR>";
       "<C-b>" =        ":Buffers<CR>";
       "<C-g>" =        ":Rg<CR>";
-      "<leader>g" =    ":GGrep<CR>";
     };
 
     vim.startPlugins = with pkgs.neovimPlugins; [
