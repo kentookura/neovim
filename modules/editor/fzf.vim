@@ -1,7 +1,7 @@
 map <C-f> :Files<CR>
-map <leader>b :Buffers<CR>
-nnoremap <C-g> :Rg<CR>
-nnoremap <leader>g :GGrep<CR>
+map <C-b> :Buffers<CR>
+nnoremap <C-g> :GGrep<CR>
+nnoremap <leader>g :Rg<CR>
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',

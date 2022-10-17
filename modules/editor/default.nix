@@ -1,13 +1,13 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim;
-in {
+in
+{
   options.vim = {
     editor = {
       indentGuide = mkEnableOption "Enable indent guides";
@@ -28,11 +28,23 @@ in {
         type = types.bool;
         default = true;
       };
+      trouble = mkOption {
+        description = "Enable trouble diagnostics plugin";
+        type = types.bool;
+        default = true;
+      };
     };
   };
 
   config = {
     vim.startPlugins = with pkgs.neovimPlugins; [
+      (
+        if cfg.editor.trouble
+        then trouble
+        else null
+      )
+      nvim-web-devicons
+      lsp-colors-nvim
       (
         if cfg.editor.mail
         then himalaya
@@ -64,6 +76,11 @@ in {
     };
 
     vim.luaConfigRC = ''
+      ${
+        if cfg.editor.trouble
+        then builtins.readFile ./trouble.lua
+        else ""
+      }
       local wk = require("which-key")
 
       wk.register({
@@ -78,7 +95,7 @@ in {
     '';
 
     vim.configRC = ''
-        "${
+      "${
         if cfg.editor.fzf
         then builtins.readFile ./fzf.vim
         else ""
@@ -94,13 +111,6 @@ in {
         ''
         else ""
       }
-
-      map <C-f> :Files<CR>
-      map <leader>b :Buffers<CR>
-      nnoremap <leader>g :Rg<CR>
-      nnoremap <leader>G :GGrep<CR>
-
-
       ${
         if cfg.editor.indentGuide
         then ''

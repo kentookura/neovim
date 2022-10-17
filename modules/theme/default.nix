@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    ./gruvbox.nix
     ./everforest.nix
     ./goyo.nix
     ./lightline.nix

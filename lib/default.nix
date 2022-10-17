@@ -85,12 +85,14 @@ with builtins; rec {
       });
 
   withDefaultSystems = withSystems defaultSystems;
-  withSystems = systems: f: foldl' (cur: nxt: let
-    ret = {
-      "${nxt}" = f nxt;
-    };
-  in
-    cur // ret) {} systems;
+  withSystems = systems: f:
+    foldl' (cur: nxt: let
+      ret = {
+        "${nxt}" = f nxt;
+      };
+    in
+      cur // ret) {}
+    systems;
 
   neovimBuilder = {
     pkgs,

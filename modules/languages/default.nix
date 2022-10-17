@@ -9,6 +9,7 @@ with builtins; let
   cfg = config.vim.lsp;
   debugpy = pkgs.python3.withPackages (pyPkg: with pyPkg; [debugpy]);
 in {
+  imports  = [./haskell ./latex ./purescript ./treesitter ./unison];
   options.vim.lsp = {
     enable = mkEnableOption "Enable lsp support";
 

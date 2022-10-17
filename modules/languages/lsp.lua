@@ -7,8 +7,8 @@ local servers = {
           'dhall_lsp_server',
           'cssls',
           'dockerls',
-          'marksman',
-          'emmet_ls',
+          -- 'marksman',
+          -- 'emmet_ls',
           'ocamlls',
           'purescriptls',
           'pyright',
@@ -31,3 +31,6 @@ nvim_lsp['sumneko_lua'].setup {
     }
   }
 }
+vim.diagnostic.config({
+  virtual_text = false,
+})

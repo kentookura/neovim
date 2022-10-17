@@ -8,14 +8,9 @@
     ./core
     ./basic
     ./theme
-    ./lsp
+    ./languages
     ./editor
     ./filetree
     ./test
-    ./latex
-    ./purescript
-    ./haskell
-    ./treesitter
-    ./unison
   ];
 }
