@@ -119,14 +119,6 @@ in {
         ''
         else ""
       }
-      ${
-        if cfg.editor.indentGuide
-        then ''
-          let g:indentLine_enabled = 1
-          set list lcs=tab:\|\
-        ''
-        else ""
-      }
     '';
   };
 }

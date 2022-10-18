@@ -120,7 +120,7 @@ in {
       ];
 
       vim.configRC = ''
-        autocmd ColorScheme * highlight highlight NvimTreeBg guibg=#2B4252
+        autocmd ColorScheme * highlight highlight NvimTreeBg guibg=#445055
         autocmd FileType NvimTree setlocal winhighlight=Normal:NvimTreeBg
       '';
 
