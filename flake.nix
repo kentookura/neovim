@@ -6,8 +6,7 @@
     lsp-signature.url = "github:ray-x/lsp_signature.nvim";
     lsp-signature.flake = false;
 
-    zenmode.url = github:folke/zen-mode.nvim;
-    zenmode.flake = false;
+    rnix-lsp.url = github:nix-community/rnix-lsp;
 
     indent-blankline-nvim.url = github:lukas-reineke/indent-blankline.nvim;
     indent-blankline-nvim.flake = false;

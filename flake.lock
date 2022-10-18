@@ -240,6 +240,22 @@
         "type": "github"
       }
     },
+    "lsp-signature": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660573480,
+        "narHash": "sha256-wY5TH15J99QjPTuIQ13Xp1byNX5xlxKHVi/A3aiwHZ8=",
+        "owner": "ray-x",
+        "repo": "lsp_signature.nvim",
+        "rev": "e65a63858771db3f086c8d904ff5f80705fd962b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ray-x",
+        "repo": "lsp_signature.nvim",
+        "type": "github"
+      }
+    },
     "mason-lspconfig": {
       "flake": false,
       "locked": {
@@ -655,6 +671,7 @@
         "lightline-vim": "lightline-vim",
         "limelight": "limelight",
         "lsp-colors-nvim": "lsp-colors-nvim",
+        "lsp-signature": "lsp-signature",
         "mason-lspconfig": "mason-lspconfig",
         "mason-nvim": "mason-nvim",
         "neoformat": "neoformat",
