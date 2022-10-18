@@ -21,7 +21,7 @@ in
   config = {
     vim.nnoremap = {
       "<leader>gb" = ":BlamerShow<CR>";
-      "<leader>gg" =    ":GGrep<CR>";
+      "<leader>gg" = ":GGrep<CR>";
     };
 
     vim.startPlugins = with pkgs.neovimPlugins; [

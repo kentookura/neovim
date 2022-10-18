@@ -2,6 +2,7 @@
   description = "Kento's Neovim config";
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
+
     rnix-lsp.url = github:nix-community/rnix-lsp;
 
     indent-blankline-nvim.url = github:lukas-reineke/indent-blankline.nvim;
@@ -16,8 +17,8 @@
     nvim-web-devicons.url = github:kyazdani42/nvim-web-devicons;
     nvim-web-devicons.flake = false;
 
-    zenmode.url = github:folke/zen-mode.nvim;
-    zenmode.flake = false;
+    zen-mode.url = github:folke/zen-mode.nvim;
+    zen-mode.flake = false;
 
     mason-nvim.url = github:williamboman/mason.nvim;
     mason-nvim.flake = false;
@@ -96,6 +97,12 @@
     nvim-dap.url = github:mfussenegger/nvim-dap;
     nvim-dap.flake = false;
 
+    telescope-nvim.url = github:nvim-telescope/telescope.nvim;
+    telescope-nvim.flake = false;
+
+    plenary-nvim.url = github:nvim-lua/plenary.nvim;
+    plenary-nvim.flake = false;
+
     telescope-dap.url = github:nvim-telescope/telescope-dap.nvim;
     telescope-dap.flake = false;
 
@@ -131,236 +138,226 @@
 
     nvim-which-key.url = github:folke/which-key.nvim;
     nvim-which-key.flake = false;
-
-    fzf-vim.url = github:junegunn/fzf.vim;
-    fzf-vim.flake = false;
-
-    fzf.url = github:junegunn/fzf;
-    fzf.flake = false;
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , neovim
-    , rnix-lsp
-    , vim-unison
-    , ...
-    } @ inputs:
-    let
-      system = "x86_64-linux";
-      plugins = [
-        "nvim-treesitter-refactor"
-        "nvim-treesitter-textobjects"
-        "indent-blankline-nvim"
-        "lsp-colors-nvim"
-        "trouble"
-        "nvim-web-devicons"
-        "mason-nvim"
-        "mason-lspconfig"
-        "vim-markdown"
-        "blamer-nvim"
-        "vim-unison"
-        "calendar-vim"
-        "purescript-vim"
-        "himalaya"
-        "vim-surround"
-        "goyo"
-        "everforest"
-        "yuck-vim"
-        "ultisnips"
-        "limelight"
-        "nvim-tree-lua"
-        "nvim-treesitter"
-        "nvim-treesitter-context"
-        "nvim-lightbulb"
-        "fixcursorhold"
-        "coq-nvim"
-        "coq-artifacts"
-        "nvim-lspconfig"
-        "completion-nvim"
-        "vim-nix"
-        "vimtex"
-        "neomake"
-        "neoformat"
-        "nvim-dap"
-        "telescope-dap"
-        "nvim-dap-virtual-text"
-        "lightline-vim"
-        "vim-pandoc"
-        "vim-pandoc-syntax"
-        "vimwiki"
-        "nvim-which-key"
-        "fzf"
-        "fzf-vim"
-      ];
-      pkgs = import nixpkgs {
-        inherit system;
-        config = { allowUnfree = true; };
-        overlays = [ ];
-      };
-
-      packages = with pkgs; {
-        inherit texlab haskell-language-server fzf;
-      };
-
-      externalBitsOverlay = top: last: {
-        rnix-lsp = rnix-lsp.defaultPackage.${top.system};
-        neovim-nightly = neovim.defaultPackage.${top.system};
-      };
-
-      pluginOverlay = top: last:
-        let
-          buildPlug = name:
-            top.vimUtils.buildVimPluginFrom2Nix {
-              pname = name;
-              version = "master";
-              src = builtins.getAttr name inputs;
-            };
-          vim-unison = vim-unison.packages."x86_64-linux".vim-unison;
-        in
-        {
-          neovimPlugins = builtins.listToAttrs (map
-            (name: {
-              inherit name;
-              value = buildPlug name;
-            })
-            plugins);
-        };
-
-      allPkgs = lib.mkPkgs {
-        inherit nixpkgs;
-        cfg = { };
-        overlays = [ pluginOverlay externalBitsOverlay ];
-      };
-
-      lib = import ./lib;
-
-      mkNeoVimPkg = pkgs:
-        lib.neovimBuilder {
-          inherit pkgs;
-          config.vim = {
-            viAlias = true;
-            vimAlias = true;
-            configRC = builtins.readFile ./init.vim;
-            globals = {
-              lasttab = 1;
-              AutoPairsMapCh = 0;
-            };
-            startPlugins = with pkgs.neovimPlugins;
-              with pkgs.vimPlugins; [
-                mason-nvim
-                mason-lspconfig
-                vim-hexokinase
-                calendar-vim
-                vim-markdown
-              ];
-
-            disableArrows = true;
-            syntaxHighlighting = true;
-            lineNumberMode = "relNumber";
-
-            git.enable = true;
-
-            editor.indentGuide = true;
-            editor.autoFormat = true;
-            editor.fzf = true;
-            editor.colorPreview = true;
-            editor.trouble = true;
-
-            filetree.enable = true;
-            filetree.hideFiles = [ ".git" ];
-            filetree.hideIgnoredGitFiles = true;
-
-            theme.everforest.enable = true;
-            theme.everforest.underline = true;
-            theme.goyo.enable = true;
-            theme.limelight.enable = true;
-            theme.lightline.enable = true;
-            theme.lightline.theme = "everforest";
-
-            treesitter.enable = true;
-            purescript.enable = true;
-            haskell.enable = true;
-            unison.enable = true;
-
-            latex.enable = true;
-            latex.compiler.method = "latexmk";
-            latex.viewer.enable = true;
-            latex.viewer.method = "zathura";
-            latex.quickfix.enable = true;
-            latex.quickfix.autoOpen = false;
-
-            lsp.enable = true;
-            lsp.bash = true;
-            lsp.nix = true;
-            lsp.vimscript = true;
-            lsp.tex = true;
-            lsp.lightbulb = true;
-            lsp.coq = true;
-          };
-        };
-      neovimBuilder = lib.neovimBuilder;
-    in
-    rec {
-      packages."x86_64-darwin" = with pkgs; rec {
-        default = neovim;
-        neovim = mkNeoVimPkg allPkgs."x86_64-darwin";
-      };
-      packages."x86_64-linux" = with pkgs; rec {
-        default = neovim;
-        neovim = mkNeoVimPkg allPkgs."x86_64-linux";
-      };
-
-      nixosModules.default = with lib; let
-        cfg = config.neovim;
-      in
-      {
-        options = { };
-        config = {
-          environment.system-packages = with pkgs; [
-            rnix-lsp
-            ormolu
-            nodePackages.prettier
-            haskell-language-server
-            hlint
-            ripgrep
-            nodePackages.typescript-language-server
-            nodePackages.vim-language-server
-            nodePackages.bash-language-server
-            nodePackages.yaml-language-server
-            nodePackages.purescript-language-server
-            texlab
-            sumneko-lua-language-server
-            ripgrep
-            fzf
-          ];
-        };
-      };
-
-      devShells.${system}.default = import ./shell.nix {inherit pkgs;};
-      #templates.default = {
-      #  path = ./templates/modules;
-      #  description = "Add a new Neovim module.";
-      #};
-
-      #apps."x86_64-linux".default = rec {
-      #  default = {
-      #    type = "app";
-      #    program = "${packages."x86_64-linux".default}/bin/nvim";
-      #  };
-      #};
-      #apps."x86_64-darwin".default = rec {
-      #  default = {
-      #    type = "app";
-      #    program = "${packages."x86_64-darwin".default}/bin/nvim";
-      #  };
-      #};
-
-      #overlays.default = final: prev: {
-      #  inherit neovimBuilder;
-      #  neovim = packages.${system}.neovim;
-      #  neovimPlugins = pkgs.neovimPlugins;
-      #};
+  outputs = {
+    self,
+    nixpkgs,
+    neovim,
+    rnix-lsp,
+    vim-unison,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    plugins = [
+      "plenary-nvim"
+      "telescope-nvim"
+      "nvim-treesitter-refactor"
+      "nvim-treesitter-textobjects"
+      "indent-blankline-nvim"
+      "lsp-colors-nvim"
+      "trouble"
+      "nvim-web-devicons"
+      "mason-nvim"
+      "mason-lspconfig"
+      "vim-markdown"
+      "blamer-nvim"
+      "vim-unison"
+      "calendar-vim"
+      "purescript-vim"
+      "himalaya"
+      "vim-surround"
+      "goyo"
+      "everforest"
+      "yuck-vim"
+      "ultisnips"
+      "limelight"
+      "nvim-tree-lua"
+      "nvim-treesitter"
+      "nvim-treesitter-context"
+      "nvim-lightbulb"
+      "fixcursorhold"
+      "coq-nvim"
+      "coq-artifacts"
+      "nvim-lspconfig"
+      "completion-nvim"
+      "vim-nix"
+      "vimtex"
+      "neomake"
+      "neoformat"
+      "nvim-dap"
+      "telescope-dap"
+      "nvim-dap-virtual-text"
+      "lightline-vim"
+      "vim-pandoc"
+      "vim-pandoc-syntax"
+      "vimwiki"
+      "nvim-which-key"
+      "zen-mode"
+    ];
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {allowUnfree = true;};
+      overlays = [];
     };
+
+    externalBitsOverlay = top: last: {
+      rnix-lsp = rnix-lsp.defaultPackage.${top.system};
+      neovim-nightly = neovim.defaultPackage.${top.system};
+    };
+
+    pluginOverlay = top: last: let
+      buildPlug = name:
+        top.vimUtils.buildVimPluginFrom2Nix {
+          pname = name;
+          version = "master";
+          src = builtins.getAttr name inputs;
+        };
+      vim-unison = vim-unison.packages."x86_64-linux".vim-unison;
+    in {
+      neovimPlugins = builtins.listToAttrs (map
+        (name: {
+          inherit name;
+          value = buildPlug name;
+        })
+        plugins);
+    };
+
+    allPkgs = lib.mkPkgs {
+      inherit nixpkgs;
+      cfg = {};
+      overlays = [pluginOverlay externalBitsOverlay];
+    };
+
+    lib = import ./lib;
+
+    mkNeoVimPkg = pkgs:
+      lib.neovimBuilder {
+        inherit pkgs;
+        config.vim = {
+          viAlias = true;
+          vimAlias = true;
+          configRC = builtins.readFile ./init.vim;
+          globals = {
+            lasttab = 1;
+            AutoPairsMapCh = 0;
+          };
+          startPlugins = with pkgs.neovimPlugins;
+          with pkgs.vimPlugins; [
+            mason-nvim
+            mason-lspconfig
+            vim-hexokinase
+            calendar-vim
+            vim-markdown
+          ];
+          nnoremap = {"<leader><leader>" = "za";};
+          vnoremap = {
+            "<C-y>" = ":'<,'>w !xclip -selection clipboard<Cr><Cr>";
+          };
+
+          disableArrows = true;
+          syntaxHighlighting = true;
+          lineNumberMode = "relNumber";
+
+          zen.enable = true;
+          git.enable = true;
+
+          editor.indentGuide = true;
+          editor.mail = true;
+          editor.autoFormat = true;
+          editor.colorPreview = true;
+          editor.trouble = true;
+
+          filetree.enable = true;
+          filetree.hideFiles = [".git"];
+          filetree.hideIgnoredGitFiles = true;
+
+          theme.defaultTheme = "everforest";
+          #theme.light = ["markdown" "latex"];
+          theme.goyo.enable = true;
+          theme.limelight.enable = true;
+          theme.lightline.enable = true;
+          theme.lightline.theme = "everforest";
+
+          treesitter.enable = true;
+          purescript.enable = true;
+          haskell.enable = true;
+          unison.enable = true;
+
+          latex.enable = true;
+          latex.compiler.method = "latexmk";
+          latex.viewer.enable = true;
+          latex.viewer.method = "zathura";
+          latex.quickfix.enable = true;
+          latex.quickfix.autoOpen = false;
+
+          lsp.enable = true;
+          lsp.bash = true;
+          lsp.nix = true;
+          lsp.vimscript = true;
+          lsp.tex = true;
+          lsp.lightbulb = true;
+          lsp.coq = true;
+        };
+      };
+    neovimBuilder = lib.neovimBuilder;
+  in rec {
+    packages."x86_64-darwin" = with pkgs; rec {
+      default = neovim;
+      neovim = mkNeoVimPkg allPkgs."x86_64-darwin";
+    };
+    packages."x86_64-linux" = with pkgs; rec {
+      default = neovim;
+      neovim = mkNeoVimPkg allPkgs."x86_64-linux";
+    };
+
+    nixosModules.default = with lib; let
+      cfg = config.neovim;
+    in {
+      options = {};
+      config = {
+        environment.systemPackages = with pkgs; [
+          rnix-lsp
+          ormolu
+          nodePackages.prettier
+          haskell-language-server
+          hlint
+          ripgrep
+          nodePackages.typescript-language-server
+          nodePackages.vim-language-server
+          nodePackages.bash-language-server
+          nodePackages.yaml-language-server
+          nodePackages.purescript-language-server
+          texlab
+          sumneko-lua-language-server
+          ripgrep
+        ];
+      };
+    };
+
+    devShells.${system}.default = import ./shell.nix {inherit pkgs;};
+    templates.default = {
+      path = ./templates/modules;
+      description = "Add a new Neovim module.";
+    };
+
+    #apps."x86_64-linux".default = rec {
+    #  default = {
+    #    type = "app";
+    #    program = "${packages."x86_64-linux".default}/bin/nvim";
+    #  };
+    #};
+    #apps."x86_64-darwin".default = rec {
+    #  default = {
+    #    type = "app";
+    #    program = "${packages."x86_64-darwin".default}/bin/nvim";
+    #  };
+    #};
+
+    #overlays.default = final: prev: {
+    #  inherit neovimBuilder;
+    #  neovim = packages.${system}.neovim;
+    #  neovimPlugins = pkgs.neovimPlugins;
+    #};
+  };
 }

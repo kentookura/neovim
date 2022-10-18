@@ -6,12 +6,20 @@ vim.g.coq_settings = {
     jump_to_mark = "<C-Space>",
   },
   display = {
-    icons = {
-      mode = "short"
+    pum = {
+      fast_close = false,
+      source_context = {":: ",""},
     },
-    --ghost_text = {
-    --  context = [" [", "] "]
-    --},
+    icons = {
+      mode = "none"
+    },
+    ghost_text = {
+      enabled = false
+    },
+    preview = {
+      border  = "solid",
+      positions = {north = 4, south = 2, west = 3, east = 1}
+    }
   },
   clients = {
     snippets = {

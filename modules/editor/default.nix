@@ -1,20 +1,20 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins; let
   cfg = config.vim;
-in
-{
+in {
   options.vim = {
     editor = {
       indentGuide = mkEnableOption "Enable indent guides";
       underlineCurrentWord = mkEnableOption "Underline the word under the cursor";
       autoFormat = mkEnableOption "Enable autoformat";
-      fzf = mkOption {
-        description = "Enable fzf";
+      telescope = mkOption {
+        description = "Enable telescope";
         type = types.bool;
         default = true;
       };
@@ -25,6 +25,11 @@ in
       };
       mail = mkOption {
         description = "Enable Himalaya client";
+        type = types.bool;
+        default = true;
+      };
+      which-key = mkOption {
+        description = "Enable which-key";
         type = types.bool;
         default = true;
       };
@@ -42,13 +47,14 @@ in
       "<leader>wc" = "<cmd>close<cr>";
       "<leader>ws" = "<cmd>split<cr>";
       "<leader>wv" = "<cmd>vsplit<cr>";
-      "<C-f>" =        ":Files<CR>";
-      "<C-b>" =        ":Buffers<CR>";
-      "<C-g>" =        ":Rg<CR>";
+      "<C-f>" = ":Files<CR>";
+      "<C-b>" = ":Buffers<CR>";
+      "<C-g>" = ":Rg<CR>";
     };
 
     vim.startPlugins = with pkgs.neovimPlugins; [
       indent-blankline-nvim
+      plenary-nvim
       (
         if cfg.editor.trouble
         then trouble
@@ -67,13 +73,8 @@ in
         else null
       )
       (
-        if cfg.editor.fzf
-        then fzf
-        else null
-      )
-      (
-        if cfg.editor.fzf
-        then fzf-vim
+        if cfg.editor.telescope
+        then telescope-nvim
         else null
       )
       nvim-which-key
@@ -83,46 +84,32 @@ in
     vim.luaConfigRC = ''
       vim.opt.termguicolors = true
       vim.opt.list = true
-      
-      require("indent_blankline").setup {
-        space_char_blankline = " ",
-        show_current_context = true,
-        show_current_context_start = true,
-        char_highlight_list = {
-        --  "IndentBlanklineIndent1",
-        --  "IndentBlanklineIndent2",
-        --  "IndentBlanklineIndent3",
-        --  "IndentBlanklineIndent4",
-        --  "IndentBlanklineIndent5",
-        --  "IndentBlanklineIndent6",
-        },
+      ${
+        if cfg.editor.telescope
+        then builtins.readFile ./telescope.lua
+        else ""
+      }
+
+      ${
+        if cfg.editor.indentGuide
+        then builtins.readFile ./indent.lua
+        else ""
       }
       ${
         if cfg.editor.trouble
         then builtins.readFile ./trouble.lua
         else ""
       }
-      local wk = require("which-key")
-
-      wk.register({
-        w = {
-          name = "window",
-          c = { "Close Window"},
-          h = { "Split Horizontal" },
-          v = { "Split Vertical" },
-        },
-      }, { prefix = "<leader>" })
+      ${
+        if cfg.editor.which-key
+        then builtins.readFile ./which-key.lua
+        else ""
+      }
 
     '';
 
     vim.configRC = ''
       "${
-        if cfg.editor.fzf
-        then builtins.readFile ./fzf.vim
-        else ""
-      }"
-
-        "${
         if cfg.editor.autoFormat
         then ''
           augroup fmt
