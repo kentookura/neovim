@@ -3,7 +3,11 @@
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
 
-    rnix-lsp.url = github:nix-community/rnix-lsp;
+    lsp-signature.url = "github:ray-x/lsp_signature.nvim";
+    lsp-signature.flake = false;
+
+    zenmode.url = github:folke/zen-mode.nvim;
+    zenmode.flake = false;
 
     indent-blankline-nvim.url = github:lukas-reineke/indent-blankline.nvim;
     indent-blankline-nvim.flake = false;
@@ -352,12 +356,6 @@
     #    type = "app";
     #    program = "${packages."x86_64-darwin".default}/bin/nvim";
     #  };
-    #};
-
-    #overlays.default = final: prev: {
-    #  inherit neovimBuilder;
-    #  neovim = packages.${system}.neovim;
-    #  neovimPlugins = pkgs.neovimPlugins;
     #};
   };
 }
