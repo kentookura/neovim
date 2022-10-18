@@ -33,109 +33,109 @@
     blamer-nvim.url = github:APZelos/blamer.nvim;
     blamer-nvim.flake = false;
 
-    calendar-vim.url = "github:itchyny/calendar.vim";
+    calendar-vim.url = github:itchyny/calendar.vim;
     calendar-vim.flake = false;
 
-    vim-hexokinase.url = "github:RRethy/hexokinase";
+    vim-hexokinase.url = github:RRethy/hexokinase;
     vim-hexokinase.flake = false;
 
-    purescript-vim.url = "github:purescript-contrib/purescript-vim";
+    purescript-vim.url = github:purescript-contrib/purescript-vim;
     purescript-vim.flake = false;
 
-    himalaya.url = "github:soywod/himalaya?dir=vim";
+    himalaya.url = github:soywod/himalaya?dir=vim;
     himalaya.flake = false;
 
-    vim-surround.url = "github:tpope/vim-surround";
+    vim-surround.url = github:tpope/vim-surround;
     vim-surround.flake = false;
 
-    goyo.url = "github:junegunn/goyo.vim";
+    goyo.url = github:junegunn/goyo.vim;
     goyo.flake = false;
 
-    everforest.url = "github:sainnhe/everforest";
+    everforest.url = github:sainnhe/everforest;
     everforest.flake = false;
 
-    limelight.url = "github:junegunn/limelight.vim";
+    limelight.url = github:junegunn/limelight.vim;
     limelight.flake = false;
 
-    yuck-vim.url = "github:elkowar/yuck.vim";
+    yuck-vim.url = github:elkowar/yuck.vim;
     yuck-vim.flake = false;
 
-    ultisnips.url = "github:SirVer/ultisnips";
+    ultisnips.url = github:SirVer/ultisnips;
     ultisnips.flake = false;
 
-    coq-nvim.url = "github:ms-jpq/coq_nvim";
+    coq-nvim.url = github:ms-jpq/coq_nvim;
     coq-nvim.flake = false;
 
-    coq-artifacts.url = "github:ms-jpq/coq.artifacts";
+    coq-artifacts.url = github:ms-jpq/coq.artifacts;
     coq-artifacts.flake = false;
 
-    nvim-tree-lua.url = "github:kyazdani42/nvim-tree.lua";
+    nvim-tree-lua.url = github:kyazdani42/nvim-tree.lua;
     nvim-tree-lua.flake = false;
 
-    nvim-treesitter.url = "github:nvim-treesitter/nvim-treesitter";
+    nvim-treesitter.url = github:nvim-treesitter/nvim-treesitter;
     nvim-treesitter.flake = false;
 
-    nvim-treesitter-context.url = "github:romgrk/nvim-treesitter-context";
+    nvim-treesitter-context.url = github:romgrk/nvim-treesitter-context;
     nvim-treesitter-context.flake = false;
 
-    nvim-treesitter-refactor.url = "github:nvim-treesitter/nvim-treesitter-refactor";
+    nvim-treesitter-refactor.url = github:nvim-treesitter/nvim-treesitter-refactor;
     nvim-treesitter-refactor.flake = false;
 
-    nvim-treesitter-textobjects.url = "github:nvim-treesitter/nvim-treesitter-textobjects";
+    nvim-treesitter-textobjects.url = github:nvim-treesitter/nvim-treesitter-textobjects;
     nvim-treesitter-textobjects.flake = false;
 
-    vim-nix.url = "github:LnL7/vim-nix";
+    vim-nix.url = github:LnL7/vim-nix;
     vim-nix.flake = false;
 
-    vimtex.url = "github:lervag/vimtex";
+    vimtex.url = github:lervag/vimtex;
     vimtex.flake = false;
 
-    neomake.url = "github:neomake/neomake";
+    neomake.url = github:neomake/neomake;
     neomake.flake = false;
 
-    nvim-dap.url = "github:mfussenegger/nvim-dap";
+    nvim-dap.url = github:mfussenegger/nvim-dap;
     nvim-dap.flake = false;
 
-    telescope-dap.url = "github:nvim-telescope/telescope-dap.nvim";
+    telescope-dap.url = github:nvim-telescope/telescope-dap.nvim;
     telescope-dap.flake = false;
 
-    nvim-dap-virtual-text.url = "github:theHamsta/nvim-dap-virtual-text";
+    nvim-dap-virtual-text.url = github:theHamsta/nvim-dap-virtual-text;
     nvim-dap-virtual-text.flake = false;
 
-    neoformat.url = "github:sbdchd/neoformat";
+    neoformat.url = github:sbdchd/neoformat;
     neoformat.flake = false;
 
-    nvim-lightbulb.url = "github:kosayoda/nvim-lightbulb";
+    nvim-lightbulb.url = github:kosayoda/nvim-lightbulb;
     nvim-lightbulb.flake = false;
 
-    fixcursorhold.url = "github:antoinemadec/FixCursorHold.nvim";
+    fixcursorhold.url = github:antoinemadec/FixCursorHold.nvim;
     fixcursorhold.flake = false;
 
-    lightline-vim.url = "github:itchyny/lightline.vim";
+    lightline-vim.url = github:itchyny/lightline.vim;
     lightline-vim.flake = false;
 
-    vim-pandoc.url = "github:vim-pandoc/vim-pandoc";
+    vim-pandoc.url = github:vim-pandoc/vim-pandoc;
     vim-pandoc.flake = false;
 
-    vim-pandoc-syntax.url = "github:vim-pandoc/vim-pandoc-syntax";
+    vim-pandoc-syntax.url = github:vim-pandoc/vim-pandoc-syntax;
     vim-pandoc-syntax.flake = false;
 
-    vimwiki.url = "github:vimwiki/vimwiki";
+    vimwiki.url = github:vimwiki/vimwiki;
     vimwiki.flake = false;
 
-    nvim-lspconfig.url = "github:neovim/nvim-lspconfig";
+    nvim-lspconfig.url = github:neovim/nvim-lspconfig;
     nvim-lspconfig.flake = false;
 
-    completion-nvim.url = "github:nvim-lua/completion-nvim";
+    completion-nvim.url = github:nvim-lua/completion-nvim;
     completion-nvim.flake = false;
 
-    nvim-which-key.url = "github:folke/which-key.nvim";
+    nvim-which-key.url = github:folke/which-key.nvim;
     nvim-which-key.flake = false;
 
-    fzf-vim.url = "github:junegunn/fzf.vim";
+    fzf-vim.url = github:junegunn/fzf.vim;
     fzf-vim.flake = false;
 
-    fzf.url = "github:junegunn/fzf";
+    fzf.url = github:junegunn/fzf;
     fzf.flake = false;
   };
 
@@ -151,7 +151,6 @@
       system = "x86_64-linux";
       plugins = [
         "nvim-treesitter-refactor"
-                                  
         "nvim-treesitter-textobjects"
         "indent-blankline-nvim"
         "lsp-colors-nvim"
