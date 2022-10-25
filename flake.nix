@@ -3,10 +3,16 @@
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
 
+    nvim-autopairs.url = github:windwp/nvim-autopairs;
+    nvim-autopairs.flake = false;
+
     lsp-signature.url = "github:ray-x/lsp_signature.nvim";
     lsp-signature.flake = false;
 
     rnix-lsp.url = github:nix-community/rnix-lsp;
+
+    nvim-instant.url = github:jbyuki/instant.nvim;
+    nvim-instant.flake = false;
 
     indent-blankline-nvim.url = github:lukas-reineke/indent-blankline.nvim;
     indent-blankline-nvim.flake = false;
@@ -153,6 +159,8 @@
   } @ inputs: let
     system = "x86_64-linux";
     plugins = [
+      "nvim-autopairs"
+      "nvim-instant"
       "plenary-nvim"
       "telescope-nvim"
       "nvim-treesitter-refactor"
@@ -251,7 +259,9 @@
             mason-lspconfig
             vim-hexokinase
             calendar-vim
+            nvim-instant
             vim-markdown
+            nvim-autopairs
           ];
           nnoremap = {"<leader><leader>" = "za";};
           vnoremap = {
@@ -320,6 +330,14 @@
       options = {};
       config = {
         environment.systemPackages = with pkgs; [
+          ctags
+          proselint
+          texlive.combined.scheme-full
+          biber
+          pstree
+          fd
+          nodejs
+          wget
           rnix-lsp
           ormolu
           nodePackages.prettier
