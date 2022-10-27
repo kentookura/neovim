@@ -43,7 +43,7 @@ in {
 
   config = {
     vim.nnoremap = {
-      "<leader>d" = ":TroubleToggle<CR>";
+      "<leader>dd" = ":TroubleToggle document_diagnostics<CR>";
       "<leader>wc" = "<cmd>close<cr>";
       "<leader>ws" = "<cmd>split<cr>";
       "<leader>wv" = "<cmd>vsplit<cr>";

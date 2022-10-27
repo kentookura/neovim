@@ -8,6 +8,7 @@ local servers = {
           'cssls',
           'dockerls',
           'rnix',
+          'elmls',
           -- 'marksman',
           -- 'emmet_ls',
           'ocamlls',
@@ -20,6 +21,11 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+nvim_lsp['elmls'].setup {
+  cmd = {  "elm-language-server" },
+  capabilities = capabilities,
+}
 
 nvim_lsp['cssls'].setup {
   cmd = {  "css-languageserver --stdio" },

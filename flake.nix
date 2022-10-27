@@ -23,7 +23,7 @@
     trouble.url = github:folke/trouble.nvim;
     trouble.flake = false;
 
-    nvim-web-devicons.url = github:kyazdani42/nvim-web-devicons;
+    nvim-web-devicons.url = github:nvim-tree/nvim-web-devicons;
     nvim-web-devicons.flake = false;
 
     zen-mode.url = github:folke/zen-mode.nvim;
@@ -38,7 +38,7 @@
     neovim.url = github:neovim/neovim?dir=contrib;
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
-    vim-unison.url = github:ceedubs/unison-nix;
+    unison-nix.url = github:ceedubs/unison-nix;
 
     blamer-nvim.url = github:APZelos/blamer.nvim;
     blamer-nvim.flake = false;
@@ -154,7 +154,7 @@
     nixpkgs,
     neovim,
     rnix-lsp,
-    vim-unison,
+    unison-nix,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -168,12 +168,10 @@
       "indent-blankline-nvim"
       "lsp-colors-nvim"
       "trouble"
-      "nvim-web-devicons"
       "mason-nvim"
       "mason-lspconfig"
       "vim-markdown"
       "blamer-nvim"
-      "vim-unison"
       "calendar-vim"
       "purescript-vim"
       "himalaya"
@@ -186,6 +184,7 @@
       "nvim-tree-lua"
       "nvim-treesitter"
       "nvim-treesitter-context"
+      "nvim-web-devicons"
       "nvim-lightbulb"
       "fixcursorhold"
       "coq-nvim"
@@ -209,7 +208,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
-      overlays = [];
+      overlays = [unison-nix.overlay];
     };
 
     externalBitsOverlay = top: last: {
@@ -224,7 +223,6 @@
           version = "master";
           src = builtins.getAttr name inputs;
         };
-      vim-unison = vim-unison.packages."x86_64-linux".vim-unison;
     in {
       neovimPlugins = builtins.listToAttrs (map
         (name: {
@@ -237,7 +235,11 @@
     allPkgs = lib.mkPkgs {
       inherit nixpkgs;
       cfg = {};
-      overlays = [pluginOverlay externalBitsOverlay];
+      overlays = [
+        unison-nix.overlay
+        pluginOverlay
+        externalBitsOverlay
+      ];
     };
 
     lib = import ./lib;
@@ -284,6 +286,8 @@
           filetree.enable = true;
           filetree.hideFiles = [".git"];
           filetree.hideIgnoredGitFiles = true;
+          filetree.devIcons = true;
+          filetree.closeOnLastWindow = true;
 
           theme.defaultTheme = "everforest";
           #theme.light = ["markdown" "latex"];
@@ -330,6 +334,7 @@
       options = {};
       config = {
         environment.systemPackages = with pkgs; [
+          nerdfonts
           ctags
           proselint
           texlive.combined.scheme-full
