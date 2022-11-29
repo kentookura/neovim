@@ -1,5 +1,5 @@
 local configs = require 'lspconfig.configs'
-local configs = require 'lspconfig.configs'
+local util = require 'lspconfig.util'
 local nvim_lsp = require('lspconfig')
 local servers = {
           'texlab',
@@ -25,18 +25,17 @@ for _, lsp in ipairs(servers) do
 end
 
 
--- Check if the config is already defined (useful when reloading this file)
- if not configs.unison then
-   configs.unison = {
-     default_config = {
-      cmd = {'nc localhost 57575'},
+if not configs.unison then
+  configs.unison = {
+    default_config = {
+      cmd = {"nc", "localhost", "5757"},
       filetypes = {'unison'},
+      root_dir = util.root_pattern('*.u'),
       settings = {},
     },
   }
+  nvim_lsp.unison.setup{}
 end
-
-nvim_lsp.unison.setup{}
 
 nvim_lsp['elmls'].setup {
   cmd = {  "elm-language-server" },
