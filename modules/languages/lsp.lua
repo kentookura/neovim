@@ -11,6 +11,7 @@ local servers = {
           'dockerls',
           'rnix',
           'elmls',
+          'unison',
           -- 'marksman',
           -- 'emmet_ls',
           'ocamlls',
@@ -24,26 +25,13 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-
-if not configs.unison then
-  configs.unison = {
-    default_config = {
-      cmd = {"nc", "localhost", "5757"},
-      filetypes = {'unison'},
-      root_dir = util.root_pattern('*.u'),
-      settings = {},
-    },
-  }
-  nvim_lsp.unison.setup{}
-end
-
 nvim_lsp['elmls'].setup {
   cmd = {  "elm-language-server" },
   capabilities = capabilities,
 }
 
 nvim_lsp['cssls'].setup {
-  cmd = {  "css-languageserver --stdio" },
+  cmd = {  "css-languageserver", "--stdio" },
   capabilities = capabilities,
 }
 
