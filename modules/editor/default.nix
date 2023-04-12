@@ -55,6 +55,7 @@ in {
     vim.startPlugins = with pkgs.neovimPlugins; [
       indent-blankline-nvim
       plenary-nvim
+      vim-gitgutter
       (
         if cfg.editor.trouble
         then trouble

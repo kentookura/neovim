@@ -43,7 +43,7 @@ autocmd FocusGained, BufEnter * checktime
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 nnoremap ! :!
 runtime macros/matchit.vim
-highlight SignColumn guibg=bg
+"highlight SignColumn guibg=bg
 
 "augroup AutoCD
 "  autocmd BufRead vimrc,home.nix silent! lcd %:p:h

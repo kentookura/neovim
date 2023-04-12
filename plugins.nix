@@ -43,4 +43,5 @@
   "vimwiki"
   "nvim-which-key"
   "zen-mode"
+  "vim-rescript"
 ]

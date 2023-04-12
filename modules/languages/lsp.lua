@@ -3,7 +3,8 @@ local util = require 'lspconfig.util'
 local nvim_lsp = require('lspconfig')
 local servers = {
           'texlab',
-          'sumneko_lua',
+          'tsserver',
+          'lua_ls',
           'bashls',
           'bufls',
           'dhall_lsp_server',
@@ -19,6 +20,13 @@ local servers = {
           'pyright',
           'texlab',
 }
+
+nvim_lsp['tsserver'].setup {
+  cmd = {
+    "$(which typescript-language-server)"
+  }
+}
+
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
@@ -35,7 +43,7 @@ nvim_lsp['cssls'].setup {
   capabilities = capabilities,
 }
 
-nvim_lsp['sumneko_lua'].setup {
+nvim_lsp['lua_ls'].setup {
   cmd = {  "lua-language-server" },
   capabilities = capabilities,
   settings = {

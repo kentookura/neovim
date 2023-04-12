@@ -12,13 +12,13 @@ in {
     enable = mkEnableOption "Enable Treesitter support";
   };
   config = let
-    treesitterWithPlugins = pkgs.vimPlugins.nvim-treesitter.withPlugins (
-      _:
-        pkgs.tree-sitter.allGrammars
-    );
+    #treesitterWithPlugins = pkgs.vimPlugins.nvim-treesitter.withPlugins (
+    #  _:
+    #    pkgs.tree-sitter.allGrammars
+    #);
   in {
     vim.startPlugins = with pkgs.neovimPlugins; [
-      treesitterWithPlugins
+      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
       nvim-treesitter-context
       nvim-treesitter-refactor
       nvim-treesitter-textobjects

@@ -24,6 +24,7 @@ in {
 
   config = mkIf cfg.enable {
     vim.startPlugins = with pkgs.neovimPlugins; [
+      vim-rescript 
       ultisnips
       (
         if cfg.lightbulb
